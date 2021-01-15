@@ -1,5 +1,6 @@
 FROM php:fpm-alpine
 
+# to wait for the start of database container
 COPY wait-for-it.sh /usr/bin/wait-for-it
 
 RUN chmod +x /usr/bin/wait-for-it
