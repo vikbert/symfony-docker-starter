@@ -1,37 +1,27 @@
-# Symfony 5 docker containers
+# SSO Proof Of Concept
 
-A Proof-of-concept of a running Symfony 5 application inside containers
+A Proof-of-concept of Single-Sign-On(SSO) in a running Symfony 5 application.
 
+
+## Start the containers
 ```
-git clone git@gitlab.com:martinpham/symfony-5-docker.git
-
-cd symfony-5-docker
-
-cd docker
-
-docker-compose up
+git clone https://github.com/vikbert/ssomoc.git
+cd ssomoc
+docker-compose up -d
 ```
 
-## Compose
+## Compose Install
 
-### Database (MariaDB)
-
-...
-
-### PHP (PHP-FPM)
-
-Composer is included
-
-```
-docker-compose run php-fpm composer 
+```bash
+docker-compose exec php composer install
 ```
 
-To run fixtures
 
 ```
 docker-compose run php-fpm bin/console doctrine:fixtures:load
 ```
 
-### Webserver (Nginx)
-
-...
+## Web
+```bash
+http://localhost
+```
