@@ -8,9 +8,9 @@ services:
         - "3307:3306"
     environment:
         MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: root
-        MYSQL_USER: root
-        MYSQL_PASSWORD: root
+        MYSQL_DATABASE: ssomoc
+        MYSQL_USER: ssomoc
+        MYSQL_PASSWORD: ssomoc
 
   php:
     build: ./docker/php
