@@ -1,4 +1,7 @@
 {
+    "brick/math": {
+        "version": "0.9.1"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -137,6 +140,12 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "ramsey/collection": {
+        "version": "1.1.1"
+    },
+    "ramsey/uuid": {
+        "version": "4.1.1"
     },
     "symfony/cache": {
         "version": "v5.2.1"
