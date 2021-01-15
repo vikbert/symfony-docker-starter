@@ -11,17 +11,15 @@ docker-compose up -d
 ```
 
 ## Compose Install
-
 ```bash
 docker-compose exec php composer install
 ```
-
 
 ```
 docker-compose run php-fpm bin/console doctrine:fixtures:load
 ```
 
-## Web
+## Localhost
 ```bash
 http://localhost
 ```
