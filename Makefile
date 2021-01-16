@@ -22,3 +22,7 @@ docker-clean: ## clean up all docker resource
 	docker container prune -f
 	docker volume prune -f
 	docker network prune -f
+
+#-- log
+log: ## tail the error log
+	tail -f ./docker/logs/nginx/error.log

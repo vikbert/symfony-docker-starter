@@ -109,4 +109,9 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
 }
