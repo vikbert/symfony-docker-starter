@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -13,33 +12,30 @@ use Ramsey\Uuid\Uuid;
  */
 class User
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="string")
+     */
+    private string $id;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $email;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $token;
+
     private function __construct(string $email)
     {
         $this->email = $email;
         $this->id = Uuid::uuid4()->toString();
     }
 
-    #[Pure]
-    public static function create(string $email
-    ): self {
+    public static function create(string $email): self
+    {
         return new self($email);
     }
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="string")
-     */
-    private string $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $email;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $token;
 
     public function getId(): ?string
     {
