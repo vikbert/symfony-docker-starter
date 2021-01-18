@@ -1,43 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="https://vikbert.github.io/pixss/build/styles/pixss.min.css">
-    {% block stylesheets %}
-        <style>
-          .topbar {
-            font-size: 30px;
-          }
-          .logo {
-            font-size: 40px;
-          }
-        </style>
-    {% endblock %}
+{% extends "@templates/base.html.twig" %}
 
-    {% block javascripts %}{% endblock %}
-</head>
-<body>
-<header class="header">
-    <nav class="topbar">
-        <div class="container space-between">
-            <div class="logo">✪</div>
-            <div class="github">👨🏻‍💻</div>
-        </div>
-    </nav>
-</header>
-<main class="main">
+{% block main %}
     <div class="hero is-primary">
         <div class="container">
-            <h1>SSO POC</h1>
+            <h1>Home</h1>
             <button class="is-rounded is-outlined">SSO login</button>
         </div>
     </div>
-</main>
-<footer class="footer">
-    <div class="container text-centered">
-        Symfony + Pixss
-    </div>
-</footer>
-</body>
-</html>
+{% endblock %}
