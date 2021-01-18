@@ -6,15 +6,8 @@ help:
 .PHONY: help
 .DEFAULT_GOAL := help
 
-#-- db
-db-clean: ## clean the db
-	symfony console doctrine:database:drop --if-exists -n --force
-	symfony console doctrine:database:create --if-not-exists -n
-	symfony console doctrine:migrations:migrate -vvv -n
+# --------------------- Makefile docker ---------------------------- #
 
-db-reset: ## reset the database
-	make db-clean
-	symfony console doctrine:fixtures:load -n
 
 #-- docker
 docker-clean: ## clean up all docker resource
