@@ -132,6 +132,9 @@
     "symfony/string": {
         "version": "v5.2.1"
     },
+    "symfony/twig-pack": {
+        "version": "v1.0.1"
+    },
     "symfony/var-dumper": {
         "version": "v5.2.1"
     },
