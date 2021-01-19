@@ -45,7 +45,7 @@ final class TokenController extends AbstractController
     {
         foreach ($keys as $key) {
             if (!$parameterBag->has($key)) {
-                throw new InvalidArgumentException(sprintf('query param "%s" missing', $key));
+                throw new InvalidArgumentException(sprintf('request param "%s" missing', $key));
             }
         }
     }
