@@ -22,5 +22,7 @@ security:
                 path: app_logout
 
     access_control:
+        - { path: ^/api/sso/check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/oauth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
