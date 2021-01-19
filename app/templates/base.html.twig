@@ -23,16 +23,24 @@
     <header class="header">
         <nav class="topbar">
             <div class="container space-between">
-                <div class="logo">✪</div>
-                <a href={{ path('profile') }}>
-                  <div class="profile">👨🏻‍💻</div>
+                <a href={{ path('app_home') }}>
+                    <div class="logo">✪</div>
+                </a>
+                <a href={{ path('app_logout') }} title="logout">
+                    <div class="logout">➲</div>
                 </a>
             </div>
         </nav>
     </header>
     <main class="main">
-        {% block main %}
-        {% endblock %}
+        <div class="hero is-primary">
+            <div class="container">
+                {% block hero %}{% endblock %}
+            </div>
+        </div>
+        <div class="container py-2 px-2">
+            {% block main %}{% endblock %}
+        </div>
     </main>
 {% endblock %}
 </body>

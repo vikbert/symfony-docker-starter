@@ -5,12 +5,13 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -25,10 +26,13 @@ class User
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $token;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $password;
 
-    private function __construct(string $email)
+    public function __construct()
     {
-        $this->email = $email;
         $this->id = Uuid::uuid4()->toString();
     }
 
@@ -62,6 +66,52 @@ class User
     public function setToken(?string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return [];
+    }
+
+    public function setRoles(array $roles): array
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function getSalt(): string
+    {
+        return '';
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->email = $username;
+
+        return $this;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials(): bool
+    {
+        return true;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }

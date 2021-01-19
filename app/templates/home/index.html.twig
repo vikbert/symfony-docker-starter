@@ -1,10 +1,9 @@
 {% extends "@templates/base.html.twig" %}
 
-{% block main %}
-    <div class="hero is-primary">
-        <div class="container">
-            <h1>Home</h1>
-            <button class="is-rounded is-outlined">SSO login</button>
-        </div>
-    </div>
+{% block hero %}
+    <h1>Home</h1>
+    <button class="is-rounded is-outlined">SSO Login</button>
+    <a href={{ path('app_login') }}>
+        <button class="is-rounded is-outlined">Default Login</button>
+    </a>
 {% endblock %}
