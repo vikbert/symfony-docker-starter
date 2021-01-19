@@ -41,6 +41,11 @@ class User implements UserInterface
         return new self($email);
     }
 
+    public function login(): void
+    {
+        $this->token = Uuid::uuid4()->toString();
+    }
+
     public function getId(): ?string
     {
         return $this->id;
