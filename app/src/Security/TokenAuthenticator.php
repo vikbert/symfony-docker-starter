@@ -42,10 +42,12 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
             return false;
         }
 
+        
         if ($request->headers->has(self::HEADER_AUTH_TOKEN)) {
             return true;
         }
 
+//        var_dump($request->headers);
         if ($request->cookies->has(self::COOKIE_AUTH_TOKEN)) {
             return true;
         }

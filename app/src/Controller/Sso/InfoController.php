@@ -28,7 +28,7 @@ final class InfoController extends AbstractController
             ->getClient('sso_client')
             ->getOAuth2Provider()
             ->getAuthorizationUrl(['scope' => SsoProvider::SSO_SCOPE]);
-
+        
         return new JsonResponse(['authzUrl' => $ssoAuthzUrl]);
     }
 }

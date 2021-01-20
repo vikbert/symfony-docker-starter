@@ -2,7 +2,9 @@
 
 {% block hero %}
     <h1>Home</h1>
-    <button class="is-rounded is-outlined">SSO Login</button>
+    <a href={{ authzUrl }}>
+        <button class="is-rounded is-outlined">SSO Login</button>
+    </a>
     <a href={{ path('app_login') }}>
         <button class="is-rounded is-outlined">Default Login</button>
     </a>

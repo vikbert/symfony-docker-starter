@@ -36,11 +36,6 @@ class User implements UserInterface
         $this->id = Uuid::uuid4()->toString();
     }
 
-    public static function create(string $email): self
-    {
-        return new self($email);
-    }
-
     public function login(): void
     {
         $this->token = Uuid::uuid4()->toString();
@@ -92,6 +87,13 @@ class User implements UserInterface
         return $this->password;
     }
 
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
     public function getSalt(): string
     {
         return '';
@@ -112,12 +114,5 @@ class User implements UserInterface
     public function eraseCredentials(): bool
     {
         return true;
-    }
-
-    public function setPassword(?string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 }
