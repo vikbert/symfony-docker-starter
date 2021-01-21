@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Controller\Sso;
 
-use App\Security\SsoProvider;
+use App\Security\Sso\SsoProvider;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,7 +20,7 @@ final class InfoController extends AbstractController
     }
 
     /**
-     * @Route("/api/sso/info", name="sso_info", methods={"GET"})
+     * @Route("/api/sso/info", name="api_sso_info", methods={"GET"})
      */
     public function __invoke(): JsonResponse
     {
@@ -28,7 +28,7 @@ final class InfoController extends AbstractController
             ->getClient('sso_client')
             ->getOAuth2Provider()
             ->getAuthorizationUrl(['scope' => SsoProvider::SSO_SCOPE]);
-
+        
         return new JsonResponse(['authzUrl' => $ssoAuthzUrl]);
     }
 }

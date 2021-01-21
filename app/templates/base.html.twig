@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://vikbert.github.io/pixss/build/styles/pixss.min.css">
-        {% block stylesheets %}{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="https://vikbert.github.io/pixss/build/styles/pixss.min.css">
+    {% block stylesheets %}
+        <style>
+          .topbar {
+            font-size: 30px;
+          }
 
-        {% block javascripts %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+          .logo {
+            font-size: 40px;
+          }
+        </style>
+    {% endblock %}
+
+    {% block javascripts %}{% endblock %}
+</head>
+<body>
+{% block body %}
+    <header class="header">
+        <nav class="topbar">
+            <div class="container space-between">
+                <a href={{ path('app_home') }}>
+                    <div class="logo">✪</div>
+                </a>
+                <a href={{ path('app_logout') }} title="logout">
+                    <div class="logout">➲</div>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="hero is-primary">
+            <div class="container">
+                {% block hero %}{% endblock %}
+            </div>
+        </div>
+        <div class="container py-2 px-2">
+            {% block main %}{% endblock %}
+        </div>
+    </main>
+{% endblock %}
+</body>
 </html>

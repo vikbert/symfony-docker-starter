@@ -1,0 +1,11 @@
+{% extends "@templates/base.html.twig" %}
+
+{% block hero %}
+    <h1>Home</h1>
+    <a href={{ authzUrl }}>
+        <button class="is-rounded is-outlined">SSO Login</button>
+    </a>
+    <a href={{ path('app_login') }}>
+        <button class="is-rounded is-outlined">Default Login</button>
+    </a>
+{% endblock %}

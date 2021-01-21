@@ -2,19 +2,21 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.3
+    image: mariadb:10.4.8
     command: ["--default-authentication-plugin=mysql_native_password --max_allowed_packet=134217728 "]
     ports:
         - "3307:3306"
     environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: ssomoc
-        MYSQL_USER: ssomoc
-        MYSQL_PASSWORD: ssomoc
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ssomoc
+      MYSQL_USER: ssomoc
+      MYSQL_PASSWORD: ssomoc
 
   php:
     build: ./docker/php
     image: ssomoc-php:latest
+    depends_on:
+      - db
     volumes:
       - ./app:/var/www
 

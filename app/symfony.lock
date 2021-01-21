@@ -165,6 +165,18 @@
     "ramsey/uuid": {
         "version": "4.1.1"
     },
+    "sensio/framework-extra-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        },
+        "files": [
+            "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
     "symfony/cache": {
         "version": "v5.2.1"
     },
@@ -340,26 +352,6 @@
     "symfony/string": {
         "version": "v5.2.1"
     },
-    "symfony/translation-contracts": {
-        "version": "v2.3.0"
-    },
-    "symfony/twig-bridge": {
-        "version": "v5.2.1"
-    },
-    "symfony/twig-bundle": {
-        "version": "5.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.0",
-            "ref": "fab9149bbaa4d5eca054ed93f9e1b66cc500895d"
-        },
-        "files": [
-            "config/packages/test/twig.yaml",
-            "config/packages/twig.yaml",
-            "templates/base.html.twig"
-        ]
-    },
     "symfony/twig-pack": {
         "version": "v1.0.1"
     },
@@ -371,11 +363,5 @@
     },
     "symfony/yaml": {
         "version": "v5.2.1"
-    },
-    "twig/extra-bundle": {
-        "version": "v3.2.1"
-    },
-    "twig/twig": {
-        "version": "v3.2.1"
     }
 }

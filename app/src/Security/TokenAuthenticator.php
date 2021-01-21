@@ -38,14 +38,16 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function supports(Request $request): bool
     {
         // sso_login not supported by TokenAuthenticator, but by SsoAuthenticator
-        if ('sso_login' === $request->attributes->get('_route')) {
+        if ('api_sso_login' === $request->attributes->get('_route')) {
             return false;
         }
 
+        
         if ($request->headers->has(self::HEADER_AUTH_TOKEN)) {
             return true;
         }
 
+//        var_dump($request->headers);
         if ($request->cookies->has(self::COOKIE_AUTH_TOKEN)) {
             return true;
         }
@@ -97,11 +99,11 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         if (is_string($user)) {
             $user = $this->userRepository->findOneBy(['email' => $user]);
         }
-        
+
         if (!$user instanceof User) {
             throw new AuthenticationException('User not found!');
         }
-        
+
         // on success, let the request continue
         return null;
     }

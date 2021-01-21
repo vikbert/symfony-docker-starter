@@ -1,20 +1,30 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace App\Controller;
 
+use App\Security\Sso\SsoProvider;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class HomeController extends AbstractController
+class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home", methods={"GET"})
+     * @Route("/", name="app_home")
      */
-    public function __invoke(): Response
+    public function index(ClientRegistry $clientRegistry): Response
     {
-        return $this->render('@templates/index.html.twig');
+        $ssoAuthzUrl = $clientRegistry
+            ->getClient('sso_client')
+            ->getOAuth2Provider()
+            ->getAuthorizationUrl(['scope' => SsoProvider::SSO_SCOPE]);
+
+        return $this->render(
+            '@templates/home/index.html.twig',
+            [
+                'authzUrl' => $ssoAuthzUrl,
+            ]
+        );
     }
 }

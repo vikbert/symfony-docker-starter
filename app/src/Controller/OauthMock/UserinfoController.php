@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class UserinfoController extends AbstractController
 {
     /**
-     * @Route("/api/oauth/mock/userinfo", name="mock_userinfo", methods={"GET"})
+     * @Route("/api/oauth/mock/userinfo", name="api_mock_userinfo", methods={"GET"})
      */
     public function __invoke(Request $request): JsonResponse
     {
@@ -23,15 +23,15 @@ final class UserinfoController extends AbstractController
 
         return new JsonResponse(
             [
-                'sub' => '382ehud3h2398d23hdh',
-                'mail' => 'vorname.nachname@oauth2.server',
-                'givenName' => 'Vorname',
+                'mail' => 'vorname.nachname@mail.com',
+                'sub' => 'sub name',
+                'givenName' => 'first name',
+                'sn' => 'last name',
                 'claims' => [],
                 'groups' => [
-                    'ssomoc-xx-test-revision',
+                    'sso-xx-test-revision',
                 ],
-                'sn' => 'Nachname',
-                'workforceId' => '1234567890',
+                'workforceID' => '10003838738383',
             ]
         );
     }

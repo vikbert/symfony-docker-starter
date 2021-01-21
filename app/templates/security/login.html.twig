@@ -1,0 +1,42 @@
+{% extends '@templates/base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block hero %}
+    <h1>Login</h1>
+    <h5>with Email <code>ssomoc@mail.com</code> and Password <code>ssomoc</code></h5>
+{% endblock %}
+
+{% block main %}
+    <div class="card px-2 py-2">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <fieldset>
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+            </fieldset>
+
+            <fieldset>
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </fieldset>
+
+            <fieldset>
+                <button class="button is-primary is-rounded" type="submit">
+                    Sign in
+                </button>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

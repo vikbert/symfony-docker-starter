@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class LoginController extends AbstractController
 {
     /**
-     * @Route("/api/sso/login", name="sso_login", methods={"POST"})
+     * @Route("/api/sso/login", name="api_sso_login", methods={"POST"})
      */
     public function __invoke(Request $request): JsonResponse
     {

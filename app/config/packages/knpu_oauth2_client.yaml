@@ -2,11 +2,11 @@ knpu_oauth2_client:
     clients:
         sso_client:
             type: generic
-            provider_class: App\Security\SsoProvider
+            provider_class: App\Security\Sso\SsoProvider
             provider_options:
                 baseAuthorizationUrl: '%env(SSO_BASE_AUTHORIZATION_URL)%'
                 baseAccessTokenUrl: '%env(SSO_BASE_ACCESS_TOKEN_URL)%'
                 resourceOwnerDetailsUrl: '%env(SSO_RESOURCE_OWNER_DETAILS_URL)%'
             client_id: '%env(SSO_CLIENT_ID)%'
             client_secret: '%env(SSO_CLIENT_SECRET)%'
-            redirect_route: 'sso_check'
+            redirect_route: 'api_sso_check'

@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller\OauthMock;
 
-use App\Security\SsoProvider;
+use App\Security\Sso\SsoProvider;
 use Exception;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -12,12 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AuthzController extends AbstractController
+final class AuthzController extends AbstractController
 {
     private const MOCK_AUTHZ_CODE = 'MOCK_AUTHZ_CODE';
 
     /**
-     * @Route("/api/oauth/mock/authz", name="mock_authz", methods={"GET"})
+     * @Route("/api/oauth/mock/authz", name="api_mock_authz", methods={"GET"})
      */
     public function __invoke(Request $request): Response
     {
@@ -29,12 +32,13 @@ class AuthzController extends AbstractController
         $redirectUrl = $request->query->get('redirect_uri') . $this->getRedirectQueryParams();
 
         if ($request->query->has('node_env')) {
-            return JsonResponse::create(['redirectUri' => $redirectUrl]);
+            return new JsonResponse(['redirectUri' => $redirectUrl]);
         }
 
         return new RedirectResponse($redirectUrl);
     }
 
+    #[Pure]
     private function getRedirectQueryParams(): string
     {
         return sprintf('?code=%s&scope=%s', self::MOCK_AUTHZ_CODE, SsoProvider::SSO_SCOPE);
