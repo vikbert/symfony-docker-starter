@@ -112,6 +112,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         $user->login();
+        $user->setRoles(['ROLE_USER']);
         $this->userRepository->save($user);
 
         $this->logger->debug(sprintf('✅ login form success: %s', $user->getToken()));

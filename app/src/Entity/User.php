@@ -30,6 +30,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $password;
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles;
 
     public function __construct()
     {
@@ -40,10 +44,11 @@ class User implements UserInterface
     {
         $this->token = Uuid::uuid4()->toString();
     }
-    
+
     public function logout(): void
     {
         $this->token = null;
+        $this->roles = null;
     }
 
     public function getId(): ?string
@@ -77,10 +82,10 @@ class User implements UserInterface
 
     public function getRoles(): array
     {
-        return [];
+        return $this->roles ?? [];
     }
 
-    public function setRoles(array $roles): array
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 

@@ -11,10 +11,9 @@ help:
 db-clean: ## clean the db
 	docker-compose exec php bin/console doctrine:database:drop --if-exists -n --force
 	docker-compose exec php bin/console doctrine:database:create --if-not-exists -n
-	docker-compose exec php bin/console doctrine:migrations:migrate -n
 
-db-load: ## reset the database
-	docker-compose exec php bin/console doctrine:fixtures:load -n
+db-migrate: ## doctrine migrate
+	docker-compose exec php bin/console doctrine:migrations:migrate -n
 
 #-- docker
 docker-clean: ## clean up all docker resource

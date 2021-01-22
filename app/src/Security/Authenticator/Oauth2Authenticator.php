@@ -78,6 +78,7 @@ final class Oauth2Authenticator extends SocialAuthenticator
         }
 
         $user->login();
+        $user->setRoles(['ROLE_USER']);
         $this->userRepository->save($user);
 
         return new JsonResponse(['authToken' => $user->getToken()]);

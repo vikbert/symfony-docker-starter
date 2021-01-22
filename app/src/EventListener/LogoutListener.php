@@ -7,32 +7,33 @@ namespace App\EventListener;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Security\Authenticator\TokenAuthenticator;
-use Exception;
-use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
 
 final class LogoutListener
 {
-    private LoggerInterface $logger;
     private UserRepository $userRepository;
+    private UrlGeneratorInterface $generator;
 
-    public function __construct(LoggerInterface $logger, UserRepository $userRepository)
+    public function __construct(UrlGeneratorInterface $generator, UserRepository $userRepository)
     {
-        $this->logger = $logger;
         $this->userRepository = $userRepository;
+        $this->generator = $generator;
     }
 
-    public function onLogoutEvent(LogoutEvent $event)
+    public function onLogoutEvent(LogoutEvent $event): Response
     {
         $user = $event->getToken()->getUser();
-        if (!$user instanceof User) {
-            throw new Exception('User is not logged in.');
+        if ($user instanceof User) {
+            $user->logout();
+            $this->userRepository->save($user);
         }
-
-        $user->logout();
-        $this->userRepository->save($user);
 
         $response = $event->getResponse();
         $response->headers->clearCookie(TokenAuthenticator::COOKIE_AUTH_TOKEN);
+
+        return new RedirectResponse($this->generator->generate('app_home'));
     }
 }
