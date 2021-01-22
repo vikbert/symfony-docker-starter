@@ -49,7 +49,14 @@ add `ssomoc.localhost` to `/etc/hosts`, then go to [http://ssomoc.localhost](htt
 
 ### Option 1:
 
-classic login form
+classic login form with `email` and `password`
+
+```bash
+ # see the credentials in security.aml
+ user: ssomoc@mail.com
+ pass: ssomoc 
+```
+
 
 ### Option 2:
 
