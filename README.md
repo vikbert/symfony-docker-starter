@@ -45,6 +45,7 @@ docker-compose exec php bin/console doctrine:migrations:migrate -n
 add `ssomoc.localhost` to `/etc/hosts`, then go to [http://ssomoc.localhost](http://ssomoc.localhost)
 
 ## Authentication
+![authenticator image](docs/authenticator.png)
 
 ### Option 1:
 
