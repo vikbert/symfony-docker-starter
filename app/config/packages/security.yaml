@@ -1,5 +1,4 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         memory_user_provider:
             memory:
@@ -17,10 +16,10 @@ security:
             provider: memory_user_provider
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
-                    - App\Security\TokenAuthenticator
-                    - App\Security\Sso\SsoAuthenticator
-                entry_point: App\Security\TokenAuthenticator
+                    - App\Security\Authenticator\LoginFormAuthenticator
+                    - App\Security\Authenticator\TokenAuthenticator
+                    - App\Security\Authenticator\SsoAuthenticator
+                entry_point: App\Security\Authenticator\TokenAuthenticator
             stateless: true
             logout:
                 path: app_logout
