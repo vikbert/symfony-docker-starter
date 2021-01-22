@@ -18,7 +18,7 @@ security:
                 authenticators:
                     - App\Security\Authenticator\LoginFormAuthenticator
                     - App\Security\Authenticator\TokenAuthenticator
-                    - App\Security\Authenticator\SsoAuthenticator
+                    - App\Security\Authenticator\Oauth2Authenticator
                 entry_point: App\Security\Authenticator\TokenAuthenticator
             stateless: true
             logout:

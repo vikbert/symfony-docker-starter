@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-final class SsoAuthenticator extends SocialAuthenticator
+final class Oauth2Authenticator extends SocialAuthenticator
 {
     private ClientRegistry $clientRegistry;
     private UserRepository $userRepository;
