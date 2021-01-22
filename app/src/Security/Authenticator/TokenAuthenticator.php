@@ -4,6 +4,7 @@ namespace App\Security\Authenticator;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,8 +17,8 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
-    private const COOKIE_AUTH_TOKEN = 'authToken';
-    private const HEADER_AUTH_TOKEN = 'X-AUTH-TOKEN';
+    public const COOKIE_AUTH_TOKEN = 'authToken';
+    public const HEADER_AUTH_TOKEN = 'X-AUTH-TOKEN';
 
     private $userRepository;
 
@@ -42,12 +43,15 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
             return false;
         }
 
-        
+        // app_login not supported by TokenAuthenticator, but by LoginFormAuthenticator
+        if ('api_login' === $request->attributes->get('_route')) {
+            return false;
+        }
+
         if ($request->headers->has(self::HEADER_AUTH_TOKEN)) {
             return true;
         }
 
-//        var_dump($request->headers);
         if ($request->cookies->has(self::COOKIE_AUTH_TOKEN)) {
             return true;
         }
@@ -55,9 +59,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         return false;
     }
 
-    /**
-     * @return string[]
-     */
+    #[ArrayShape(['token' => "mixed"])] 
     public function getCredentials(Request $request): array
     {
         $token = null;
@@ -72,15 +74,15 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         ];
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
+    public function getUser($credentials, UserProviderInterface $loginFormUserProvider): UserInterface
     {
-        $apiToken = $credentials['token'];
+        $token = $credentials['token'];
 
-        if (null === $apiToken) {
+        if (null === $token) {
             throw new AuthenticationException('Token empty!');
         }
 
-        $user = $this->userRepository->findOneBy(['token' => $apiToken]);
+        $user = $this->userRepository->findOneBy(['token' => $token]);
         if (null === $user) {
             throw new AuthenticationException('User not found by token!');
         }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,7 +25,7 @@ class UserRepository extends ServiceEntityRepository
         return $this->findOneBy(['token' => $token]);
     }
 
-    public function save(User $user): void
+    public function save(UserInterface $user): void
     {
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();

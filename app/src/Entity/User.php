@@ -40,6 +40,11 @@ class User implements UserInterface
     {
         $this->token = Uuid::uuid4()->toString();
     }
+    
+    public function logout(): void
+    {
+        $this->token = null;
+    }
 
     public function getId(): ?string
     {
