@@ -48,9 +48,9 @@ add `ssomoc.localhost` to `/etc/hosts`, then go to [http://ssomoc.localhost](htt
 
 <img src="docs/authenticator.png" alt="authenticator" width="600">
 
-### Option 1:
+### Option 1: authentication via `login form`
 
-classic login form with `email` and `password`
+classic login form with `email` and `password`: go to `http://ssomoc.localhost/login` and do login with `email` and `password`.
 
 ```bash
  # see the credentials in security.aml
@@ -59,9 +59,9 @@ classic login form with `email` and `password`
 ```
 
 
-### Option 2:
+### Option 2: authentication via `sso oauth2`
 
-sso via oauth2 (mock API)
+sso via oauth2 (mock API): on the homepage, click on the button `SSO Login`
 
 ## E2E Tests
 `login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
@@ -73,6 +73,16 @@ make tests
 node_modules/cypress/bin/cypress open 
 ```
 ![tests](docs/cypress.png)
+
+### Option 3: authentication via `X-AUTH-TOKEN`
+It can be tested in curl or in REST client. The `X-AUTH-TOKEN` will be persisted in browser cookie under the name `authToken`, after a successful `sso-login` or `default login`.
+
+```bash
+curl -i -X GET \
+   -H "X-AUTH-TOKEN:3e5a75e5-c3c1-4e56-9ad5-65657f1afb9c" \
+ 'http://ssomoc.localhost/api/todos' 
+```
+
 
 
 ## Routing
@@ -87,16 +97,31 @@ node_modules/cypress/bin/cypress open
   api_mock_token      POST     ANY      ANY    /api/oauth/mock/token
   api_mock_userinfo   GET      ANY      ANY    /api/oauth/mock/userinfo
 
+  api_sso_check       GET      ANY      ANY    /api/sso/check
+  api_sso_info        GET      ANY      ANY    /api/sso/info
+  api_sso_login       POST     ANY      ANY    /api/sso/login
+
+  api_todos           GET      ANY      ANY    /api/todos
+
   app_home            ANY      ANY      ANY    /
   app_profile         GET      ANY      ANY    /profile
   app_login           ANY      ANY      ANY    /login
   app_logout          ANY      ANY      ANY    /logout
-
-  api_sso_check       GET      ANY      ANY    /api/sso/check
-  api_sso_info        GET      ANY      ANY    /api/sso/info
-  api_sso_login       POST     ANY      ANY    /api/sso/login
  ------------------- -------- -------- ------ --------------------------
 ```
+
+#### api_mock_*
+> there are 3x mocked APIs as the replacement of the classic oauth2 REST API
+
+#### api_sso_*
+> To make the sso possible in a PHP or SPA or mobile APP, there are 3x utility APIs to construct the SSO authorization-code-flow.
+
+#### api_*
+> the dummy restful resource API, which is authenticated with additional header `X-AUTH-TOKEN`
+
+#### app_*
+> they are the standard symfony application routes
+
 
 ## licence
 
