@@ -45,6 +45,12 @@ docker-compose exec php bin/console doctrine:migrations:migrate -n
 add `ssomoc.localhost` to `/etc/hosts`, then go to [http://ssomoc.localhost](http://ssomoc.localhost)
 
 ## Authentication
+there are `3x` options to authenticate the client in this demo project.
+- login `form`
+- sso via `oauth2`
+- X-AUTH-TOKEN via `token`
+
+See the details in `LoginFormAuthenticator`, `Oauth2Authenticator`, `TokenAuthenticator` in `src/Security` and the guard configuration in `security.yaml`
 
 <img src="docs/authenticator.png" alt="authenticator" width="600">
 
@@ -63,16 +69,6 @@ classic login form with `email` and `password`: go to `http://ssomoc.localhost/l
 
 sso via oauth2 (mock API): on the homepage, click on the button `SSO Login`
 
-## E2E Tests
-`login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
-```bash
-docker-compose up -d # be sure that `http://ssomoc.localhost` is reachable.
-npm install
-make tests
-# or
-node_modules/cypress/bin/cypress open 
-```
-![tests](docs/cypress.png)
 
 ### Option 3: authentication via `X-AUTH-TOKEN`
 It can be tested in curl or in REST client. The `X-AUTH-TOKEN` will be persisted in browser cookie under the name `authToken`, after a successful `sso-login` or `default login`.
@@ -122,6 +118,16 @@ curl -i -X GET \
 #### app_*
 > they are the standard symfony application routes
 
+## E2E Tests
+`login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
+```bash
+docker-compose up -d # be sure that `http://ssomoc.localhost` is reachable.
+npm install
+make tests
+# or
+node_modules/cypress/bin/cypress open 
+```
+![tests](docs/cypress.png)
 
 ## licence
 
