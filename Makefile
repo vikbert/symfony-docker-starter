@@ -22,3 +22,7 @@ docker-clean: ## clean up all docker resource
 	docker volume prune -f
 	docker network prune -f
 	docker-compose up -d
+
+#-- E2E tests
+tests: ## start the cypres E2E tests
+	node_modules/cypress/bin/cypress open

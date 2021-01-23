@@ -63,6 +63,17 @@ classic login form with `email` and `password`
 
 sso via oauth2 (mock API)
 
+## E2E Tests
+`login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
+```bash
+npm install
+make tests
+# or
+node_modules/cypress/bin/cypress open 
+```
+![tests](docs/cypress.png)
+
+
 ## Routing
 
 ```bash
