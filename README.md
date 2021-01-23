@@ -131,4 +131,4 @@ node_modules/cypress/bin/cypress open
 
 ## licence
 
-MIT @vikbert
+MIT [@vikbert](https://vikbert.github.io/)
