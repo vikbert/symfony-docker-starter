@@ -66,6 +66,7 @@ sso via oauth2 (mock API)
 ## E2E Tests
 `login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
 ```bash
+docker-compose up -d # be sure that `http://ssomoc.localhost` is reachable.
 npm install
 make tests
 # or
