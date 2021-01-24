@@ -22,7 +22,7 @@
 
 A Proof-of-concept of Single-Sign-On(SSO) in a standard Symfony 5 application with php 8.
 
-![](docs/home2.png)
+![](docs/ssomoc.png)
 
 ## Start the containers
 
