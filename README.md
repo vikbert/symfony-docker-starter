@@ -4,7 +4,7 @@
 </div>
 
 <div align="center">
-  <p>SSOmoc demonstrates the most commony used authentications in `symfony 5` project, such as <code>login form</code>, <code>token authentication</code>, <code>sso via oauth2-mock-api</code>.</p>
+  <p>SSOmoc demonstrates the most commonly used authentications in `symfony 5` project, such as <code>login form</code>, <code>token authentication</code>, <code>sso via oauth2-mock-api</code>.</p>
 
   <p>
     <a href="#">
