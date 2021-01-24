@@ -1,6 +1,6 @@
 <div align="center">
     <h1 style="font-weight: bolder; margin-top: 0px" class="opacity-75">SSOmoc</h1>
-    <h3 class="opacity-50">Single-Sign-On + Mocked Oauth2</h3>
+    <h3 class="opacity-50">SSO + Mocked Oauth2</h3>
 </div>
 
 <div align="center">
@@ -20,7 +20,10 @@
 
 ---
 
-A Proof-of-concept of Single-Sign-On(SSO) in a standard Symfony 5 application with php 8.
+<div align="center">
+    <h1 style="font-weight: bolder; margin-top: 0px" class="opacity-75">SSOmoc</h1>
+    <h3 class="opacity-50">A Symfony demonstration of SSO Authentication</h3>
+</div>
 
 ![](docs/ssomoc2.png)
 
