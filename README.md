@@ -1,11 +1,9 @@
 <div align="center">
     <h1 style="font-weight: bolder; margin-top: 0px" class="opacity-75">SSOmoc</h1>
-    <h3 class="opacity-50">Single-Sign-On + Mocked Oauth2</h3>
+    <h3 class="opacity-50">SSO + Mocked Oauth2</h3>
 </div>
 
 <div align="center">
-  <!-- <img src="https://vikbert.github.io/pixss/demo/static/app-small.png" alt="pixss" />
-  <h3>A pragmatic CSS for Minimalist</h3> -->
   <p>ssomoc implements both classic authentication with <strong>login form</strong> and <strong>sso authentication</strong> via oauth2-mock-api</p>
 
   <p>
@@ -20,7 +18,6 @@
 
 ---
 
-A Proof-of-concept of Single-Sign-On(SSO) in a standard Symfony 5 application with php 8.
 
 ![](docs/ssomoc2.png)
 
