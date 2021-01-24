@@ -45,10 +45,11 @@ docker-compose exec php bin/console doctrine:migrations:migrate -n
 add `ssomoc.localhost` to `/etc/hosts`, then go to [http://ssomoc.localhost](http://ssomoc.localhost)
 
 ## Authentication
-there are `3x` options to authenticate the client in this demo project.
+there are serveral options to authenticate the client in this demo project.
 - login `form`
 - sso via `oauth2`
 - X-AUTH-TOKEN via `token`
+- sso via `GitHub Oauth2`
 
 See the details in `LoginFormAuthenticator`, `Oauth2Authenticator`, `TokenAuthenticator` in `src/Security` and the guard configuration in `security.yaml`
 
@@ -78,8 +79,30 @@ curl -i -X GET \
    -H "X-AUTH-TOKEN:3e5a75e5-c3c1-4e56-9ad5-65657f1afb9c" \
  'http://ssomoc.localhost/api/todos' 
 ```
+### Option 4: authentication vai `GitHub Oauth2`
+you need create the `Oauth2 app` in the github account to get the `clientID` and `clientSecret`. 
+
+To do this, go to `github.com` and select `setting` => `developer settings` => `OAuth Apps` => `New OAuth App`.
 
 
+Then add the generated client ID and client secret to a new file named `.env.local` to overwrite the existing dummy `SSO_CLIENT_ID` and `SSO_CLIENT_SECRET` in `.env`. 
+
+For example:
+
+```bash
+###> Oauth API ###
+SSO_BASE_AUTHORIZATION_URL=http://ssomoc.localhost/api/oauth/mock/authz
+SSO_BASE_ACCESS_TOKEN_URL=http://nginx/api/oauth/mock/token
+SSO_RESOURCE_OWNER_DETAILS_URL=http://nginx/api/oauth/mock/userinfo
+SSO_CLIENT_ID=my_client_id
+SSO_CLIENT_SECRET=my_client_secret
+###< symfony/framework-bundle ###
+
+###> Oauth API: github ###
+SSO_CLIENT_ID=e5243e172*****
+SSO_CLIENT_SECRET=82496bbd41************
+###< symfony/framework-bundle ### 
+```
 
 ## Routing
 
@@ -96,6 +119,8 @@ curl -i -X GET \
   api_sso_check       GET      ANY      ANY    /api/sso/check
   api_sso_info        GET      ANY      ANY    /api/sso/info
   api_sso_login       POST     ANY      ANY    /api/sso/login
+
+  connect_github      GET      ANY      ANY    /connect/github
 
   api_todos           GET      ANY      ANY    /api/todos
 
@@ -118,6 +143,10 @@ curl -i -X GET \
 #### app_*
 > they are the standard symfony application routes
 
+#### connect_*
+> any sso connection via 3. party Oauth2 API, for example `GitHub Oauth2`
+
+
 ## E2E Tests
 `login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
 ```bash
@@ -128,6 +157,8 @@ make tests
 node_modules/cypress/bin/cypress open 
 ```
 ![tests](docs/cypress.png)
+
+
 
 ## licence
 

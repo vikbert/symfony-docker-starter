@@ -3,7 +3,7 @@
 {% block hero %}
 	<h1>SSOmoc</h1>
 	<p>
-        Demostration of
+        Symfony demonstration of
         <code>login authentication</code>,
         <code>token authentication</code>,
         <code>sso via mocked Oauth2</code>,
@@ -19,7 +19,7 @@
 				<div class="card">
 					<div class="content centered-xy">
 						<a href={{ path('app_login') }}>
-							<button class="is-rounded is-primary">Default Login</button>
+							<button class="is-rounded is-outlined">Default Login</button>
 						</a>
                         <p>Login with Email and Password</p>
 					</div>
@@ -29,7 +29,7 @@
 				<div class="card">
 					<div class="content centered-xy">
 						<a href={{ authzUrl }}>
-							<button class="is-rounded is-outlined" id="buttonSso">SSO Login</button>
+							<button class="is-rounded is-primary" id="buttonSso">SSO Mock</button>
 						</a>
                         <p>Authentication via <code>mocked Oauth2</code></p>
 					</div>
@@ -38,7 +38,7 @@
 			<div class="column">
 				<div class="card">
 					<div class="content centered-xy">
-						<a href={{ path('connect_github_start') }}>
+						<a href={{ path('connect_github') }}>
 							<button class="is-rounded is-outlined">GitHub Login</button>
 						</a>
                         <p>Authentication via <code>GitHub Oauth2</code></p>
