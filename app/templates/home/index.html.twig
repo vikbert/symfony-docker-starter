@@ -19,7 +19,7 @@
 				<div class="card">
 					<div class="content centered-xy">
 						<a href={{ path('app_login') }}>
-							<button class="is-rounded is-secondary">Default Login</button>
+							<button class="is-rounded is-primary">Default Login</button>
 						</a>
                         <p>Login with Email and Password</p>
 					</div>
@@ -29,9 +29,9 @@
 				<div class="card">
 					<div class="content centered-xy">
 						<a href={{ authzUrl }}>
-							<button class="is-rounded is-primary" id="buttonSso">SSO Login</button>
+							<button class="is-rounded is-outlined" id="buttonSso">SSO Login</button>
 						</a>
-                        <p>Authentication via mocked oauth2 API</p>
+                        <p>Authentication via <code>mocked Oauth2</code></p>
 					</div>
 				</div>
 			</div>
@@ -39,9 +39,9 @@
 				<div class="card">
 					<div class="content centered-xy">
 						<a href={{ path('connect_github_start') }}>
-							<button class="is-rounded is-warning">GitHub Login</button>
+							<button class="is-rounded is-outlined">GitHub Login</button>
 						</a>
-                        <p>Authentication via GitHub Oauth2 API</p>
+                        <p>Authentication via <code>GitHub Oauth2</code></p>
 					</div>
 				</div>
 			</div>
