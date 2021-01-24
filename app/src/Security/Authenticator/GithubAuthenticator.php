@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-final class Oauth2Authenticator extends SocialAuthenticator
+final class GithubAuthenticator extends SocialAuthenticator
 {
     private ClientRegistry $clientRegistry;
     private UserRepository $userRepository;
@@ -53,7 +53,7 @@ final class Oauth2Authenticator extends SocialAuthenticator
 
     public function supports(Request $request): bool
     {
-        return 'api_sso_check' === $request->attributes->get('_route');
+        return 'api_github_check' === $request->attributes->get('_route');
     }
 
     public function getCredentials(Request $request): AccessToken
@@ -100,7 +100,7 @@ final class Oauth2Authenticator extends SocialAuthenticator
 
     private function getSsoClient(): OAuth2ClientInterface
     {
-        $ssoClient = $this->clientRegistry->getClient('sso_client');
+        $ssoClient = $this->clientRegistry->getClient('github');
         $ssoClient->setAsStateless();
 
         return $ssoClient;

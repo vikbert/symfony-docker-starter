@@ -20,4 +20,13 @@ final class GithubController extends AbstractController
             ->getClient('github')
             ->redirect(['public_profile', 'email'], []);
     }
+
+    /**
+     * @Route("/api/github/check", name="api_github_check", methods={"GET"})
+     */
+    public function check(ClientRegistry $clientRegistry): RedirectResponse
+    {
+        die('fool');
+        return new RedirectResponse($this->generateUrl('app_profile'), 302);
+    }
 }

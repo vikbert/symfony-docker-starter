@@ -19,13 +19,13 @@ security:
                     - App\Security\Authenticator\LoginFormAuthenticator
                     - App\Security\Authenticator\TokenAuthenticator
                     - App\Security\Authenticator\Oauth2Authenticator
+                    - App\Security\Authenticator\GithubAuthenticator
                 entry_point: App\Security\Authenticator\TokenAuthenticator
             stateless: true
             logout:
                 path: app_logout
 
     access_control:
-        - { path: ^/api/sso/check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/oauth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api, roles: ROLE_USER }
