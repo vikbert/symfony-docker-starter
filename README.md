@@ -111,7 +111,6 @@ SSO_CLIENT_SECRET=82496bbd41************
  ------------------- -------- -------- ------ --------------------------
   Name                Method   Scheme   Host   Path
  ------------------- -------- -------- ------ --------------------------
-  
   api_mock_authz      GET      ANY      ANY    /api/oauth/mock/authz
   api_mock_token      POST     ANY      ANY    /api/oauth/mock/token
   api_mock_userinfo   GET      ANY      ANY    /api/oauth/mock/userinfo
@@ -120,7 +119,8 @@ SSO_CLIENT_SECRET=82496bbd41************
   api_sso_info        GET      ANY      ANY    /api/sso/info
   api_sso_login       POST     ANY      ANY    /api/sso/login
 
-  connect_github      GET      ANY      ANY    /connect/github
+  api_github_connect  GET      ANY      ANY    /api/github/connect
+  api_github_check    GET      ANY      ANY    /api/github/check
 
   api_todos           GET      ANY      ANY    /api/todos
 
@@ -143,8 +143,8 @@ SSO_CLIENT_SECRET=82496bbd41************
 #### app_*
 > they are the standard symfony application routes
 
-#### connect_*
-> any sso connection via 3. party Oauth2 API, for example `GitHub Oauth2`
+#### api_github_*
+> sso connection via Oauth2 API `GitHub Oauth2`
 
 
 ## E2E Tests

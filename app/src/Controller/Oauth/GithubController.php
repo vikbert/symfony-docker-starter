@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class GithubController extends AbstractController
 {
     /**
-     * @Route("/connect/github", name="connect_github", methods={"GET"})
+     * @Route("/api/github/connect", name="api_github_connect", methods={"GET"})
      */
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
@@ -26,7 +26,6 @@ final class GithubController extends AbstractController
      */
     public function check(ClientRegistry $clientRegistry): RedirectResponse
     {
-        die('fool');
         return new RedirectResponse($this->generateUrl('app_profile'), 302);
     }
 }

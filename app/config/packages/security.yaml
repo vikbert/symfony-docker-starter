@@ -26,6 +26,7 @@ security:
                 path: app_logout
 
     access_control:
+        - { path: ^/api/github/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/oauth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api, roles: ROLE_USER }
