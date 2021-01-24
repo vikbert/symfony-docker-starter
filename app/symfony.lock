@@ -132,6 +132,9 @@
     "league/oauth2-client": {
         "version": "2.6.0"
     },
+    "league/oauth2-github": {
+        "version": "2.0.0"
+    },
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
