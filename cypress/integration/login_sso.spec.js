@@ -5,7 +5,6 @@ describe('Login form', () => {
 
     cy.get('#buttonSso').click();
     cy.location('pathname').should('include', 'profile');
-    cy.contains('secured profile page');
 
     cy.get('#linkLogout').click();
     cy.location('pathname').should('include', '');

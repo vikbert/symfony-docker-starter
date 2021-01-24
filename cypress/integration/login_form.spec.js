@@ -9,7 +9,6 @@ describe('Login form', () => {
     cy.get('form').submit();
 
     cy.location('pathname').should('include', 'profile');
-    cy.contains('secured profile page');
 
     cy.get('#linkLogout').click();
     cy.location('pathname').should('include', '');
