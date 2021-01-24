@@ -4,7 +4,7 @@
 </div>
 
 <div align="center">
-  <p>ssomoc implements both classic authentication with <strong>login form</strong> and <strong>sso authentication</strong> via oauth2-mock-api</p>
+  <p>SSOmoc demonstrates the most commony used authentications in `symfony 5` project, such as <code>login form</code>, <code>token authentication</code>, <code>sso via oauth2-mock-api</code>.</p>
 
   <p>
     <a href="#">
@@ -21,38 +21,35 @@
 
 ![](docs/ssomoc2.png)
 
-## Start the containers
+## Starting started
 
 ```
 git clone https://github.com/vikbert/ssomoc.git
 cd ssomoc
+
 docker-compose up -d
-```
-
-## Compose Install
-
-```bash
 docker-compose exec php composer install
 docker-compose exec php bin/console doctrine:database:create --if-not-exists -n
 docker-compose exec php bin/console doctrine:migrations:migrate -n
 ```
 
-## Localhost
+## Localhost URL
 
 add `ssomoc.localhost` to `/etc/hosts`, then go to [http://ssomoc.localhost](http://ssomoc.localhost)
 
 ## Authentication
 there are serveral options to authenticate the client in this demo project.
 - login `form`
-- sso via `oauth2`
 - X-AUTH-TOKEN via `token`
+- sso via `Mocked oauth2`
 - sso via `GitHub Oauth2`
 
-See the details in `LoginFormAuthenticator`, `Oauth2Authenticator`, `TokenAuthenticator` in `src/Security` and the guard configuration in `security.yaml`
+See the details in `LoginFormAuthenticator`, `Oauth2Authenticator`, `TokenAuthenticator`, `GithubAuthenticator` in `src/Security` and the guard configuration in `security.yaml`
 
 <img src="docs/authenticator.png" alt="authenticator" width="600">
 
-### Option 1: authentication via `login form`
+### Option 1: 
+> authentication via `login form`
 
 classic login form with `email` and `password`: go to `http://ssomoc.localhost/login` and do login with `email` and `password`.
 
@@ -63,12 +60,15 @@ classic login form with `email` and `password`: go to `http://ssomoc.localhost/l
 ```
 
 
-### Option 2: authentication via `sso oauth2`
+### Option 2: 
+> authentication via `sso oauth2`
 
 sso via oauth2 (mock API): on the homepage, click on the button `SSO Login`
 
 
-### Option 3: authentication via `X-AUTH-TOKEN`
+### Option 3: 
+> authentication via `X-AUTH-TOKEN`
+
 It can be tested in curl or in REST client. The `X-AUTH-TOKEN` will be persisted in browser cookie under the name `authToken`, after a successful `sso-login` or `default login`.
 
 ```bash
@@ -76,7 +76,9 @@ curl -i -X GET \
    -H "X-AUTH-TOKEN:3e5a75e5-c3c1-4e56-9ad5-65657f1afb9c" \
  'http://ssomoc.localhost/api/todos' 
 ```
-### Option 4: authentication vai `GitHub Oauth2`
+### Option 4: 
+> authentication vai `GitHub Oauth2`
+
 you need create the `Oauth2 app` in the github account to get the `clientID` and `clientSecret`. 
 
 To do this, go to `github.com` and select `setting` => `developer settings` => `OAuth Apps` => `New OAuth App`.
@@ -86,7 +88,9 @@ Then add the generated client ID and client secret to a new file named `.env.loc
 
 For example:
 
-```bash
+```js
+// .env.local
+
 ###> Oauth API ###
 SSO_BASE_AUTHORIZATION_URL=http://ssomoc.localhost/api/oauth/mock/authz
 SSO_BASE_ACCESS_TOKEN_URL=http://nginx/api/oauth/mock/token
