@@ -88,7 +88,7 @@ Then add the generated client ID and client secret to a new file named `.env.loc
 
 For example:
 
-```js
+```
 // .env.local
 
 ###> Oauth API ###
