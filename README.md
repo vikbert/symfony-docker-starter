@@ -4,8 +4,6 @@
 </div>
 
 <div align="center">
-  <!-- <img src="https://vikbert.github.io/pixss/demo/static/app-small.png" alt="pixss" />
-  <h3>A pragmatic CSS for Minimalist</h3> -->
   <p>ssomoc implements both classic authentication with <strong>login form</strong> and <strong>sso authentication</strong> via oauth2-mock-api</p>
 
   <p>
@@ -20,10 +18,6 @@
 
 ---
 
-<div align="center">
-    <h1 style="font-weight: bolder; margin-top: 0px" class="opacity-75">SSOmoc</h1>
-    <h3 class="opacity-50">A Symfony demonstration of SSO Authentication</h3>
-</div>
 
 ![](docs/ssomoc2.png)
 
