@@ -155,11 +155,9 @@ docker-compose up -d # be sure that `http://ssomoc.localhost` is reachable.
 npm install
 make tests
 # or
-node_modules/cypress/bin/cypress open 
+node_modules/cypress/bin/cypress run --spec 'cypress/integration/login_*.spec.js'
 ```
-![tests](docs/cypress.png)
-
-> start cypress via headless browser
+Tests results:
 ```bash
        Spec                                              Tests  Passing  Failing  Pending  Skipped
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
