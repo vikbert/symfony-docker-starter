@@ -24,5 +24,7 @@ docker-clean: ## clean up all docker resource
 	docker-compose up -d
 
 #-- E2E tests
-tests: ## start the cypress E2E tests
+test: ## start the cypress E2E tests
 	node_modules/cypress/bin/cypress run --spec 'cypress/integration/login_*.spec.js'
+test-open: ## open the cypress E2E runner
+	node_modules/cypress/bin/cypress open
