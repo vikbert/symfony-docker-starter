@@ -159,6 +159,16 @@ node_modules/cypress/bin/cypress open
 ```
 ![tests](docs/cypress.png)
 
+> start cypress via headless browser
+```bash
+       Spec                                              Tests  Passing  Failing  Pending  Skipped
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  login_form.spec.js                       00:04        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  login_sso.spec.js                        00:04        1        1        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✔  All specs passed!                        00:09        2        2        -        -        -
+```
 
 
 ## licence

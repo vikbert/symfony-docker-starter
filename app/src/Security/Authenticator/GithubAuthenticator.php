@@ -70,7 +70,8 @@ final class GithubAuthenticator extends SocialAuthenticator
         $userIdentifier = $ownerData['mail'] ?? $ownerData['login'];
 
         $user = new User();
-        $user->setEmail($userIdentifier);
+        $user->setAccessToken($credentials->getToken());
+        $user->setUsername($userIdentifier);
 
         return $user;
     }
@@ -83,17 +84,15 @@ final class GithubAuthenticator extends SocialAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): RedirectResponse
     {
         $user = $token->getUser();
-
         if (!$user instanceof User) {
             throw new AuthenticationException('User not found by token');
         }
 
         $user->login();
-        $user->setRoles(['ROLE_USER']);
         $this->userRepository->save($user);
 
         $response = new RedirectResponse($this->generator->generate('app_profile'));
-        $response->headers->setCookie(new Cookie('authToken', $user->getToken()));
+        $response->headers->setCookie(new Cookie('authToken', $user->getAuthToken()));
 
         return $response;
     }

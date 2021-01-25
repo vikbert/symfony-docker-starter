@@ -82,10 +82,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $loginFormUser = $loginFormUserProvider->loadUserByUsername($credentials['email']);
 
         $grantedUser = new User();
-        $grantedUser->setEmail($loginFormUser->getUsername());
+        $grantedUser->setUsername($loginFormUser->getUsername());
         $grantedUser->setPassword($loginFormUser->getPassword());
 
-        $this->logger->debug(sprintf('🔥 get the granted user from memory: %s', $grantedUser->getEmail()));
+        $this->logger->debug(sprintf('🔥 get the granted user from memory: %s', $grantedUser->getUsername()));
 
         return $grantedUser;
     }
@@ -112,13 +112,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         $user->login();
-        $user->setRoles(['ROLE_USER']);
         $this->userRepository->save($user);
 
-        $this->logger->debug(sprintf('✅ login form success: %s', $user->getToken()));
+        $this->logger->debug(sprintf('✅ login form success: %s', $user->getAuthToken()));
 
         $response = new RedirectResponse($this->urlGenerator->generate('app_profile'), 302);
-        $response->headers->setCookie(new Cookie('authToken', $user->getToken()));
+        $response->headers->setCookie(new Cookie('authToken', $user->getAuthToken()));
 
         return $response;
     }

@@ -22,7 +22,7 @@ class UserRepository extends ServiceEntityRepository
 
     public function findOneByToken(string $token): ?User
     {
-        return $this->findOneBy(['token' => $token]);
+        return $this->findOneBy(['authToken' => $token]);
     }
 
     public function save(UserInterface $user): void

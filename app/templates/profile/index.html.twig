@@ -1,11 +1,15 @@
 {% extends "@templates/base.html.twig" %}
 
-
 {% block hero %}
     <h1>Profile</h1>
     <h5>🔥 if you see this profile content, you are authenticated successfully. 🔥</h5>
 {% endblock %}
 
 {% block main %}
-    <span>profile content</span>
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h5>Hello, {{ user.username }}</h5>
 {% endblock %}

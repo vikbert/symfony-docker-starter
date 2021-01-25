@@ -21,11 +21,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $email;
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private ?string $token;
+    private string $username;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -34,6 +30,14 @@ class User implements UserInterface
      * @ORM\Column(type="json", nullable=true)
      */
     private $roles;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $authToken;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $accessToken;
 
     public function __construct()
     {
@@ -42,13 +46,15 @@ class User implements UserInterface
 
     public function login(): void
     {
-        $this->token = Uuid::uuid4()->toString();
+        $this->authToken = Uuid::uuid4()->toString();
+        $this->roles = ['ROLE_USER'];
     }
 
     public function logout(): void
     {
-        $this->token = null;
+        $this->authToken = null;
         $this->roles = null;
+        $this->accessToken = null;
     }
 
     public function getId(): ?string
@@ -56,28 +62,21 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): string
+    public function getUsername(): string
     {
-        return $this->email;
+        return $this->username;
     }
 
-    public function setEmail(string $email): self
+    public function setUsername(string $username): self
     {
-        $this->email = $email;
+        $this->username = $username;
 
         return $this;
     }
 
-    public function getToken(): ?string
+    public function getAuthToken(): ?string
     {
-        return $this->token;
-    }
-
-    public function setToken(?string $token): self
-    {
-        $this->token = $token;
-
-        return $this;
+        return $this->authToken;
     }
 
     public function getRoles(): array
@@ -109,20 +108,15 @@ class User implements UserInterface
         return '';
     }
 
-    public function setUsername(string $username): self
-    {
-        $this->email = $username;
-
-        return $this;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->email;
-    }
-
     public function eraseCredentials(): bool
     {
         return true;
+    }
+
+    public function setAccessToken(?string $accessToken): self
+    {
+        $this->accessToken = $accessToken;
+
+        return $this;
     }
 }

@@ -70,19 +70,19 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         }
 
         return [
-            'token' => $token,
+            'authToken' => $token,
         ];
     }
 
     public function getUser($credentials, UserProviderInterface $loginFormUserProvider): UserInterface
     {
-        $token = $credentials['token'];
+        $token = $credentials['authToken'];
 
         if (null === $token) {
             throw new AuthenticationException('Token empty!');
         }
 
-        $user = $this->userRepository->findOneBy(['token' => $token]);
+        $user = $this->userRepository->findOneByToken($token);
         if (null === $user) {
             throw new AuthenticationException('User not found by token!');
         }

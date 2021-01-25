@@ -70,7 +70,7 @@ final class Oauth2Authenticator extends SocialAuthenticator
         $userIdentifier = $ownerData['mail'] ?? $ownerData['login'];
 
         $user = new User();
-        $user->setEmail($userIdentifier);
+        $user->setUsername($userIdentifier);
 
         return $user;
     }
@@ -89,11 +89,10 @@ final class Oauth2Authenticator extends SocialAuthenticator
         }
 
         $user->login();
-        $user->setRoles(['ROLE_USER']);
         $this->userRepository->save($user);
 
         $response = new RedirectResponse($this->generator->generate('app_profile'));
-        $response->headers->setCookie(new Cookie('authToken', $user->getToken()));
+        $response->headers->setCookie(new Cookie('authToken', $user->getAuthToken()));
 
         return $response;
     }
