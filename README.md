@@ -151,13 +151,16 @@ SSO_CLIENT_SECRET=82496bbd41************
 ## E2E Tests
 `login via form`, `login via sso` are tested by cypressE2E tests. To start the tests:
 ```bash
-docker-compose up -d # be sure that `http://ssomoc.localhost` is reachable.
+# be sure that `http://ssomoc.localhost` is reachable.
+docker-compose up -d 
+
 npm install
 make test
+
 # or
 node_modules/cypress/bin/cypress run --spec 'cypress/integration/login_*.spec.js'
 ```
-Tests results:
+Test results:
 ```bash
        Spec                                              Tests  Passing  Failing  Pending  Skipped
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
