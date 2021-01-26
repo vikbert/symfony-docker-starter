@@ -153,7 +153,7 @@ SSO_CLIENT_SECRET=82496bbd41************
 ```bash
 docker-compose up -d # be sure that `http://ssomoc.localhost` is reachable.
 npm install
-make tests
+make test
 # or
 node_modules/cypress/bin/cypress run --spec 'cypress/integration/login_*.spec.js'
 ```
