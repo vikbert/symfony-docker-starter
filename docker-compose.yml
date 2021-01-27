@@ -17,12 +17,19 @@ services:
             - ./logs/nginx:/var/log/nginx:cached
             - ./app:/var/www/app:cached
     db:
-        image: mariadb:10.4.8
-        command: ["--default-authentication-plugin=mysql_native_password --max_allowed_packet=134217728 "]
-        ports:
-            - "3307:3306"
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: symfony
-            MYSQL_USER: symfony
-            MYSQL_PASSWORD: symfony
+      image: postgres:11-alpine
+      environment:
+        POSTGRES_USER: db_user
+        POSTGRES_PASSWORD: db_password
+        POSTGRES_DB: db_name
+      ports: [2345:5432]
+    # db:
+    #     image: mariadb:10.4.8
+    #     command: ["--default-authentication-plugin=mysql_native_password --max_allowed_packet=134217728 "]
+    #     ports:
+    #         - "3307:3306"
+    #     environment:
+    #         MYSQL_ROOT_PASSWORD: root
+    #         MYSQL_DATABASE: symfony
+    #         MYSQL_USER: symfony
+    #         MYSQL_PASSWORD: symfony

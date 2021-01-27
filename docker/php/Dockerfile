@@ -1,7 +1,12 @@
 FROM php:fpm-alpine
 
 RUN apk --update --no-cache add git
-RUN docker-php-ext-install pdo_mysql
+# MySQL extension
+#RUN docker-php-ext-install pdo_mysql
+
+# PostgreSQL extension
+RUN set -ex && apk --no-cache add postgresql-dev
+RUN docker-php-ext-install pdo pdo_pgsql
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
