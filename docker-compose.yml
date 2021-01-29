@@ -22,7 +22,7 @@ services:
 
   nginx:
     build: ./docker/nginx
-    image: ssomoc-nginx:latest
+    image: nginx:vikbert
     volumes:
       - ./app:/var/www
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
