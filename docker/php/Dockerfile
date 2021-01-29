@@ -1,26 +1,21 @@
 FROM php:fpm-alpine
 
 RUN apk --update --no-cache add git
-# MySQL extension
-#RUN docker-php-ext-install pdo_mysql
 
-# PostgreSQL extension
+# MySQL
+#RUN docker-php-ext-install pdo_mysql
+# MySQL
+
+# PostgreSQL
 RUN set -ex && apk --no-cache add postgresql-dev
-RUN docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install pdo_pgsql
+# PostgreSQL
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
-ENV SYMFONY_PHPUNIT_VERSION=8.3
-ADD symfony.ini /etc/php7/conf.d/
-ADD symfony.ini /etc/php7/cli/conf.d/
-ADD symfony.pool.conf /etc/php7/php-fpm.d/
-
-ADD xdebug.ini  /etc/php7/conf.d/
-
-WORKDIR /var/www/app
+WORKDIR /var/www
 
 CMD composer -V;  php-fpm
 
-EXPOSE 9001
+EXPOSE 9000

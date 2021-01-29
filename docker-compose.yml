@@ -1,35 +1,31 @@
-version: '3.7'
+version: '3'
 
 services:
-    php:
-        build: ./docker/php
-        volumes: &php_volumes
-            - ./app:/var/www/app:cached
-            - ./logs/app:/var/www/app/var/log:cached
-    nginx:
-        build:
-            context: ./docker/nginx
-            args:
-                DOCKER_ENV: "dev"
-        ports:
-            - "80:80"
-        volumes:
-            - ./logs/nginx:/var/log/nginx:cached
-            - ./app:/var/www/app:cached
-    db:
-      image: postgres:11-alpine
-      environment:
-        POSTGRES_USER: db_user
-        POSTGRES_PASSWORD: db_password
-        POSTGRES_DB: db_name
-      ports: [2345:5432]
-    # db:
-    #     image: mariadb:10.4.8
-    #     command: ["--default-authentication-plugin=mysql_native_password --max_allowed_packet=134217728 "]
-    #     ports:
-    #         - "3307:3306"
-    #     environment:
-    #         MYSQL_ROOT_PASSWORD: root
-    #         MYSQL_DATABASE: symfony
-    #         MYSQL_USER: symfony
-    #         MYSQL_PASSWORD: symfony
+
+  php:
+    build: ./docker/php
+    image: base-php:latest
+    volumes:
+      - ./app:/var/www
+      - ./docker/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
+
+  nginx:
+    build: ./docker/nginx
+    image: base-nginx:latest
+    volumes:
+      - ./app:/var/www
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/sites/:/etc/nginx/sites-available
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d
+      - ./docker/logs:/var/www/var/log
+    ports: [80:80, 443:443]
+
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_USER: db_user
+      POSTGRES_PASSWORD: db_password
+      POSTGRES_DB: db_name
+    ports: [2345:5432]
+
+
