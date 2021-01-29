@@ -7,6 +7,7 @@ services:
     image: base-php:latest
     volumes:
       - ./app:/var/www
+      - ./docker/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
 
   nginx:
     build: ./docker/nginx
