@@ -12,6 +12,8 @@ RUN docker-php-ext-install pdo_pgsql
 # PostgreSQL
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+ADD xdebug.ini /etc/php7/conf.d
+
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
 WORKDIR /var/www
