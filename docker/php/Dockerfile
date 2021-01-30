@@ -1,3 +1,4 @@
+# PHP v8.0.1, size: 310 MB
 FROM php:fpm-alpine
 
 RUN apk --update --no-cache add git
@@ -13,6 +14,7 @@ RUN docker-php-ext-install pdo_pgsql
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
+ADD xdebug.ini /etc/php7/conf.d
 
 WORKDIR /var/www
 

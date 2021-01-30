@@ -6,26 +6,24 @@ services:
     build: ./docker/php
     image: base-php:latest
     volumes:
-      - ./app:/var/www
-      - ./docker/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
+      - ./app:/var/www:cached
 
   nginx:
     build: ./docker/nginx
     image: base-nginx:latest
     volumes:
-      - ./app:/var/www
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker/nginx/sites/:/etc/nginx/sites-available
-      - ./docker/nginx/conf.d/:/etc/nginx/conf.d
-      - ./docker/logs:/var/log
+      - ./app:/var/www:cached
+      - ./logs/nginx:/var/log/nginx:cached
     ports: [80:80, 443:443]
 
   db:
-    image: postgres:11-alpine
+    build: ./docker/db
+    image: base-db:latest
     environment:
       POSTGRES_USER: ssomoc
       POSTGRES_PASSWORD: ssomoc
       POSTGRES_DB: ssomoc
     ports: [2345:5432]
+    restart: always
 
 
