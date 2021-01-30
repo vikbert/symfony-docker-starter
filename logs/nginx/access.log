@@ -1,2 +1,0 @@
-192.168.32.1 - - [30/Jan/2021:14:29:07 +0000] "GET / HTTP/1.1" 404 32028 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
-192.168.32.1 - - [30/Jan/2021:14:29:08 +0000] "GET /favicon.ico HTTP/1.1" 404 176525 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
