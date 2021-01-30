@@ -31,7 +31,20 @@ git clone https://github.com/vikbert/symfony-docker-starter.git
 cd symfony-docker-starter
 
 docker-compose up -d
+symfony new app
+cp .env.local app/
 ```
+
+Command **symfony** can be installed with this command
+```bash
+curl -sS https://get.symfony.com/cli/installer | bash
+```
+
+## Open App
+```bash
+http://localhost 
+```
+
 
 ## licence
 
