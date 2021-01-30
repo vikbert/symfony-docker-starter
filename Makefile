@@ -8,7 +8,13 @@ help:
 .DEFAULT_GOAL := help
 
 
-#-- db
+#-- Application
+init: ## init the app
+	docker-compose up -d
+	symfony new app
+	cp .env.local app/
+
+#-- Database & Migration
 db-clean: ## clean the db
 	docker-compose exec php bin/console doctrine:database:drop --if-exists -n --force
 	docker-compose exec php bin/console doctrine:database:create --if-not-exists -n
@@ -16,7 +22,7 @@ db-clean: ## clean the db
 db-migrate: ## doctrine migrate
 	docker-compose exec php bin/console doctrine:migrations:migrate -n
 
-#-- docker
+#-- Docker Resource
 docker-clean: ## clean up all docker resource
 	docker-compose stop
 	docker container prune -f

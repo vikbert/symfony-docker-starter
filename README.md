@@ -16,12 +16,21 @@
 
 ---
 
+![](symfony5.png)
 
 | service | version |
 | -- | -- |
 | symfony | 5 |
 | php | 8.0.1 |
 | PostgreSQL | 13.0.1 |
+
+```bash
+➜ dps
+CONTAINER ID   IMAGE               COMMAND                  PORTS                                      NAMES
+19750f5406e8   base-nginx:latest   "/docker-entrypoint.…"   0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   symfony-docker-starter_nginx_1
+ec4830a5f74e   base-php:latest     "docker-php-entrypoi…"   9000/tcp                                   symfony-docker-starter_php_1
+42ab8a62da84   base-db:latest      "docker-entrypoint.s…"   0.0.0.0:2345->5432/tcp                     symfony-docker-starter_db_1 
+```
 
 
 ## Starting started
