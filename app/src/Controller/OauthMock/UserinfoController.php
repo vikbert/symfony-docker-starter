@@ -23,7 +23,7 @@ final class UserinfoController extends AbstractController
 
         return new JsonResponse(
             [
-                'mail' => 'vorname.nachname@mail.com',
+                'mail' => 'mock-response-email@mock.mock',
                 'sub' => 'sub name',
                 'givenName' => 'first name',
                 'sn' => 'last name',
