@@ -19,7 +19,7 @@
 ---
 
 
-![](docs/ssomoc2.png)
+![](docs/ssomoc.png)
 
 ## Starting started
 
