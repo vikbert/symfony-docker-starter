@@ -25,6 +25,8 @@
 
 ```
 git clone https://vcs.sys.schwarz/zhoux/siam-oauth2-fake-server-symfony-demo.git ssomoc
+
+# ✅ close now VPN connection
 cd ssomoc
 make start
 ```
