@@ -7,6 +7,16 @@ help:
 .PHONY: help
 .DEFAULT_GOAL := help
 
+#-- project
+start: ## start the application
+	make docker-clean
+	docker-compose up -d
+	sleep 5
+	make db-migrate
+	cd ./docker/siam && npm install
+	open http://localhost
+
+
 #-- db
 db-clean: ## clean the db
 	docker-compose exec php bin/console doctrine:database:drop --if-exists -n --force
