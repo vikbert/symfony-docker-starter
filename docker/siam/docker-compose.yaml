@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+    node:
+        build: .
+        image: siamoc:latest
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./:/bindmount:rw
+        ports:
+            - "1234:1234"
