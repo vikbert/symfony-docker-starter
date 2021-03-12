@@ -10,10 +10,11 @@ help:
 #-- project
 start: ## start the application
 	make docker-clean
+	cd ./docker/siam && npm install
 	docker-compose up -d
 	sleep 5
+	docker-compose exec php composer install
 	make db-migrate
-	cd ./docker/siam && npm install
 	open http://localhost
 
 
