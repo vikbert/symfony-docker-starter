@@ -1,10 +1,10 @@
 <div align="center">
     <h1 style="font-weight: bolder; margin-top: 0px" class="opacity-75">SSOmoc</h1>
-    <h3 class="opacity-50">SSO + Mocked Oauth2</h3>
+    <h3 class="opacity-50">SSO + fake Oauth2</h3>
 </div>
 
 <div align="center">
-  <p>SSOmoc demonstrates the most commonly used authentications in `symfony 5` project, such as <code>login form</code>, <code>token authentication</code>, <code>sso via oauth2-mock-api</code>.</p>
+  <p>SSOmoc demonstrates the most commonly used authentications in `symfony 5` project, such as <code>login form</code>, <code>token authentication</code>, <code>sso via oauth2-fake-server</code>.</p>
 
   <p>
     <a href="#">
@@ -24,24 +24,20 @@
 ## Starting started
 
 ```
-git clone https://github.com/vikbert/ssomoc.git
+git clone https://vcs.sys.schwarz/zhoux/siam-oauth2-fake-server-symfony-demo.git ssomoc
 cd ssomoc
-
-docker-compose up -d
-docker-compose exec php composer install
-docker-compose exec php bin/console doctrine:database:create --if-not-exists -n
-docker-compose exec php bin/console doctrine:migrations:migrate -n
+make start
 ```
 
 ## Localhost URL
 
-add `ssomoc.localhost` to `/etc/hosts`, then go to [http://ssomoc.localhost](http://ssomoc.localhost)
+go to [http://localhost](http://localhost)
 
 ## Authentication
 there are serveral options to authenticate the client in this demo project.
 - login `form`
 - X-AUTH-TOKEN via `token`
-- sso via `Mocked oauth2`
+- sso via `Mocked oauth2 server`
 - sso via `GitHub Oauth2`
 
 See the details in `LoginFormAuthenticator`, `Oauth2Authenticator`, `TokenAuthenticator`, `GithubAuthenticator` in `src/Security` and the guard configuration in `security.yaml`
@@ -51,7 +47,7 @@ See the details in `LoginFormAuthenticator`, `Oauth2Authenticator`, `TokenAuthen
 ### Option 1: 
 > authentication via `login form`
 
-classic login form with `email` and `password`: go to `http://ssomoc.localhost/login` and do login with `email` and `password`.
+classic login form with `email` and `password`: go to `http://localhost/login` and do login with `email` and `password`.
 
 ```bash
  # see the credentials in security.aml
@@ -90,19 +86,22 @@ For example:
 
 ```
 // .env.local
-
-###> Oauth API ###
+# ###> Oauth API: gitHub ###
 SSO_BASE_AUTHORIZATION_URL=http://ssomoc.localhost/api/oauth/mock/authz
 SSO_BASE_ACCESS_TOKEN_URL=http://nginx/api/oauth/mock/token
 SSO_RESOURCE_OWNER_DETAILS_URL=http://nginx/api/oauth/mock/userinfo
-SSO_CLIENT_ID=my_client_id
-SSO_CLIENT_SECRET=my_client_secret
-###< symfony/framework-bundle ###
-
+SSO_CLIENT_ID=e5243e17278c99b1b8e9
+SSO_CLIENT_SECRET=82496bbd41f3a3e512ef9328c71cf412f8d194d7
 ###> Oauth API: github ###
-SSO_CLIENT_ID=e5243e172*****
-SSO_CLIENT_SECRET=82496bbd41************
-###< symfony/framework-bundle ### 
+
+###> SIAM Fake Server ###
+SIAM_CLIENT_ID=fakeclientid
+SIAM_CLIENT_SECRET=fakeclientsecret
+SIAM_BASE_AUTHORIZATION_URL=http://localhost:1234/authz
+SIAM_BASE_ACCESS_TOKEN_URL=http://siam:1234/token
+SIAM_RESOURCE_OWNER_DETAILS_URL=http://siam:1234/userinfo
+###> SIAM Fake Server ###
+
 ```
 
 ## Routing
