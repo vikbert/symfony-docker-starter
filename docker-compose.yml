@@ -1,7 +1,15 @@
 version: '3'
 
 services:
-
+  siam:
+      build: ./docker/siam
+      image: siamoc:latest
+      working_dir: /var/www
+      volumes:
+          - ./docker/siam:/var/www
+          - ./docker/siam:/bindmount:rw
+      ports:
+          - "1234:1234"
   php:
     build: ./docker/php
     image: base-php:latest
