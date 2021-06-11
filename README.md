@@ -1,6 +1,5 @@
 <div align="center">
     <h1 style="font-weight: bolder; margin-top: 0px" class="opacity-75">SSOmoc</h1>
-    <h3 class="opacity-50">SSO + fake Oauth2</h3>
 </div>
 
 <div align="center">
@@ -11,13 +10,12 @@
       <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
     </a>
     <a href="#">
-      <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square" alt="MIT License">
+      <img src="https://img.shields.io/badge/License-Apache-brightgreen.svg?style=flat-square" alt="Apache License">
     </a>
   </p>
 </div>
 
 ---
-
 
 ![](docs/ssomoc.png)
 
