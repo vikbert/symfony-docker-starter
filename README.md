@@ -174,5 +174,7 @@ Test results:
 
 
 ## licence
+[apache-2.0](https://choosealicense.com/licenses/apache-2.0/)
 
-MIT [@vikbert](https://vikbert.github.io/)
+## Maintainer
+[xun.zhou@mail.schwarz](https://vikbert.github.io/)
