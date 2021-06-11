@@ -76,13 +76,17 @@ final class SsoProvider extends AbstractProvider
     protected function checkResponse(ResponseInterface $response, $data): void
     {
         if ($response->getStatusCode() >= 400) {
-            throw new IdentityProviderException($data['error'] ?? $response->getReasonPhrase(), $response->getStatusCode(), $response->getBody()->getContents());
+            throw new IdentityProviderException(
+                $data['error'] ?? $response->getReasonPhrase(),
+                $response->getStatusCode(),
+                $response->getBody()->getContents()
+            );
         }
     }
 
     #[Pure]
-    protected function createResourceOwner(array $response, AccessToken $token
-    ): SsoResourceOwner {
+    protected function createResourceOwner(array $response, AccessToken $token): SsoResourceOwner
+    {
         return new SsoResourceOwner($response);
     }
 
