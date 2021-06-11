@@ -2,8 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Security\Sso;
+namespace App\Security\Siam;
 
+use App\Controller\Siam\SiamConstant;
 use JetBrains\PhpStorm\Pure;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -12,12 +13,9 @@ use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-final class SsoProvider extends AbstractProvider
+final class SiamProvider extends AbstractProvider
 {
     use BearerAuthorizationTrait;
-
-    public const SSO_SCOPE = 'sso';
-    private const RESOURCE_SERVER = 'my_resource_server';
 
     protected $baseAuthorizationUrl;
     protected $baseAccessTokenUrl;
@@ -43,7 +41,7 @@ final class SsoProvider extends AbstractProvider
      */
     protected function getDefaultScopes(): array
     {
-        return [self::SSO_SCOPE];
+        return [SiamConstant::SSO_SCOPE];
     }
 
     protected function getAuthorizationParameters(array $options): array
@@ -65,7 +63,7 @@ final class SsoProvider extends AbstractProvider
         $params = array_merge(
             $params,
             [
-                'resourceServer' => self::RESOURCE_SERVER,
+                'resourceServer' => SiamConstant::SSO_RESOURCE_SERVER,
                 'scope' => implode($this->getScopeSeparator(), $this->getDefaultScopes()),
             ]
         );
@@ -76,18 +74,14 @@ final class SsoProvider extends AbstractProvider
     protected function checkResponse(ResponseInterface $response, $data): void
     {
         if ($response->getStatusCode() >= 400) {
-            throw new IdentityProviderException(
-                $data['error'] ?? $response->getReasonPhrase(),
-                $response->getStatusCode(),
-                $response->getBody()->getContents()
-            );
+            throw new IdentityProviderException($data['error'] ?? $response->getReasonPhrase(), $response->getStatusCode(), $response->getBody()->getContents());
         }
     }
 
     #[Pure]
-    protected function createResourceOwner(array $response, AccessToken $token): SsoResourceOwner
-    {
-        return new SsoResourceOwner($response);
+    protected function createResourceOwner(array $response, AccessToken $token
+    ): SiamResourceOwner {
+        return new SiamResourceOwner($response);
     }
 
     protected function buildQueryString(array $params): string

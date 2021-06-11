@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Security\Authenticator;
 
+use App\Controller\Siam\SiamConstant;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Security\Sso\SsoResourceOwner;
@@ -53,7 +54,7 @@ final class Oauth2Authenticator extends SocialAuthenticator
 
     public function supports(Request $request): bool
     {
-        return 'api_sso_check' === $request->attributes->get('_route');
+        return SiamConstant::ROUTE_CHECK === $request->attributes->get('_route');
     }
 
     public function getCredentials(Request $request): AccessToken
@@ -99,7 +100,7 @@ final class Oauth2Authenticator extends SocialAuthenticator
 
     private function getSsoClient(): OAuth2ClientInterface
     {
-        $ssoClient = $this->clientRegistry->getClient('sso_client');
+        $ssoClient = $this->clientRegistry->getClient(SiamConstant::SSO_CLIENT_NAME);
         $ssoClient->setAsStateless();
 
         return $ssoClient;

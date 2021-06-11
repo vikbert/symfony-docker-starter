@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Controller\OauthMock;
 
+use App\Controller\Siam\SiamConstant;
 use App\Security\Sso\SsoProvider;
 use Exception;
 use JetBrains\PhpStorm\Pure;
@@ -41,7 +42,7 @@ final class AuthzController extends AbstractController
     #[Pure]
     private function getRedirectQueryParams(): string
     {
-        return sprintf('?code=%s&scope=%s', self::MOCK_AUTHZ_CODE, SsoProvider::SSO_SCOPE);
+        return sprintf('?code=%s&scope=%s', self::MOCK_AUTHZ_CODE, SiamConstant::SSO_SCOPE);
     }
 
     private function assertParamsSet(ParameterBag $parameterBag, array $keys): void

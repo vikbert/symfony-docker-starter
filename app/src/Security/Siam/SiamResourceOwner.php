@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace App\Security\Sso;
+namespace App\Security\Siam;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
-final class SsoResourceOwner implements ResourceOwnerInterface
+final class SiamResourceOwner implements ResourceOwnerInterface
 {
     private $responseData;
 
