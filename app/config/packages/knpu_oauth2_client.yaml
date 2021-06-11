@@ -12,7 +12,7 @@ knpu_oauth2_client:
             redirect_route: 'api_sso_check'
         github:
             type: github
-            client_id: '%env(SSO_CLIENT_ID)%'
-            client_secret: '%env(SSO_CLIENT_SECRET)%'
+            client_id: '%env(GITHUB_CLIENT_ID)%'
+            client_secret: '%env(GITHUB_CLIENT_SECRET)%'
             redirect_route: 'api_github_check'
-            redirect_params: {}
+            redirect_params: { }
