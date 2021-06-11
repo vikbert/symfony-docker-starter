@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Controller\Siam;
+namespace App\Service\Siam;
 
 final class SiamConstant
 {
@@ -10,4 +10,6 @@ final class SiamConstant
     public const SSO_CLIENT_NAME = 'siam_client';
     public const SSO_SCOPE = 'sso';
     public const SSO_RESOURCE_SERVER = 'my_resource_server';
+    public const RESPONSE_KEY_WORKFORCE_ID = 'workforceId';
+    public const RESPONSE_KEY_ROLES = 'groups';
 }

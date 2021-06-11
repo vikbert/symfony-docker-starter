@@ -2,8 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Security\Siam;
+namespace App\Service\Siam\Security;
 
+use App\Service\Siam\SiamConstant;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 final class SiamResourceOwner implements ResourceOwnerInterface
@@ -17,7 +18,7 @@ final class SiamResourceOwner implements ResourceOwnerInterface
 
     public function getId(): ?string
     {
-        return $this->responseData['workforceId'] ?? null;
+        return $this->responseData[SiamConstant::RESPONSE_KEY_WORKFORCE_ID] ?? null;
     }
 
     public function toArray(): array
@@ -30,6 +31,6 @@ final class SiamResourceOwner implements ResourceOwnerInterface
      */
     public function getRoles(): array
     {
-        return $this->responseData['groups'] ?? [];
+        return $this->responseData[SiamConstant::RESPONSE_KEY_ROLES] ?? [];
     }
 }

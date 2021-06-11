@@ -16,9 +16,9 @@ security:
             provider: memory_user_provider
             guard:
                 authenticators:
+                    - App\Service\Siam\Security\SiamAuthenticator
                     - App\Security\Authenticator\LoginFormAuthenticator
                     - App\Security\Authenticator\TokenAuthenticator
-                    - App\Security\Authenticator\Oauth2Authenticator
                     - App\Security\Authenticator\GithubAuthenticator
                 entry_point: App\Security\Authenticator\TokenAuthenticator
             stateless: true

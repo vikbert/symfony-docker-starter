@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Security\Siam;
+namespace App\Service\Siam\Security;
 
-use App\Controller\Siam\SiamConstant;
+use App\Service\Siam\SiamConstant;
 use JetBrains\PhpStorm\Pure;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -79,8 +79,8 @@ final class SiamProvider extends AbstractProvider
     }
 
     #[Pure]
-    protected function createResourceOwner(array $response, AccessToken $token
-    ): SiamResourceOwner {
+    protected function createResourceOwner(array $response, AccessToken $token): SiamResourceOwner
+    {
         return new SiamResourceOwner($response);
     }
 
