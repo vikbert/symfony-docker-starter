@@ -37,3 +37,4 @@ final class LogoutListener
         return new RedirectResponse($this->generator->generate('app_home'));
     }
 }
+
