@@ -46,7 +46,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request): bool
     {
-        $this->logger->debug('🔥 check if request app_login supported');
+        $this->logger->debug('check if request app_login supported');
 
         return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
@@ -67,7 +67,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
 
-        $this->logger->debug(sprintf('🔥read credentials from request: %s', json_encode($credentials)));
+        $this->logger->debug(sprintf('read credentials from request: %s', json_encode($credentials)));
 
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -90,7 +90,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $grantedUser->setUsername($loginFormUser->getUsername());
         $grantedUser->setPassword($loginFormUser->getPassword());
 
-        $this->logger->debug(sprintf('🔥 get the granted user from memory: %s', $grantedUser->getUsername()));
+        $this->logger->debug(sprintf('get the granted user from memory: %s', $grantedUser->getUsername()));
 
         return $grantedUser;
     }
@@ -119,7 +119,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $user->login();
         $this->userRepository->save($user);
 
-        $this->logger->debug(sprintf('✅ login form success: %s', $user->getAuthToken()));
+        $this->logger->debug(sprintf('login form success: %s', $user->getAuthToken()));
 
         $response = new RedirectResponse($this->urlGenerator->generate('app_profile'), 302);
         $response->headers->setCookie(new Cookie('authToken', $user->getAuthToken()));

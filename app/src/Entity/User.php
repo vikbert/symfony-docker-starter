@@ -33,6 +33,7 @@ class User implements UserInterface
     private ?string $password;
 
     /**
+     * @var array<int, string> | null
      * @ORM\Column(type="json", nullable=true)
      */
     private $roles;
