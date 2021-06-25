@@ -59,13 +59,13 @@ final class SiamAuthenticator extends SocialAuthenticator
 
     public function getCredentials(Request $request): AccessToken
     {
-        return $this->fetchAccessToken($this->getSsoClient());
+        return $this->fetchAccessToken($this->getSiamClient());
     }
 
     public function getUser($credentials, UserProviderInterface $loginFormUserProvider): User
     {
-        /** @var SsoResourceOwner $resourceOwner */
-        $resourceOwner = $this->getSsoClient()->getOAuth2Provider()->getResourceOwner($credentials);
+        /** @var SiamResourceOwner $resourceOwner */
+        $resourceOwner = $this->getSiamClient()->getOAuth2Provider()->getResourceOwner($credentials);
         $ownerData = $resourceOwner->toArray();
 
         $userIdentifier = $ownerData['mail'] ?? $ownerData['login'];
@@ -98,7 +98,7 @@ final class SiamAuthenticator extends SocialAuthenticator
         return $response;
     }
 
-    private function getSsoClient(): OAuth2ClientInterface
+    private function getSiamClient(): OAuth2ClientInterface
     {
         $ssoClient = $this->clientRegistry->getClient(SiamConstant::SSO_CLIENT_NAME);
         $ssoClient->setAsStateless();
