@@ -15,7 +15,7 @@ class ProfileController extends AbstractController
     public function __invoke(Security $security): Response
     {
         $this->addFlash('notice', 'Authentication ✅');
-        
+
         return $this->render('@templates/profile/index.html.twig', ['user' => $security->getUser()]);
     }
 }

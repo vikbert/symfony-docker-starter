@@ -74,6 +74,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^0.12.90",
+        "phpstan/phpstan-symfony": "^0.12.37",
         "symfony/maker-bundle": "^1.28"
     }
 }

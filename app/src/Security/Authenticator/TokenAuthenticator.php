@@ -31,7 +31,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         return new JsonResponse(
             [
                 'message' => 'Authentication Required',
-            ], Response::HTTP_UNAUTHORIZED
+            ],
+            Response::HTTP_UNAUTHORIZED
         );
     }
 

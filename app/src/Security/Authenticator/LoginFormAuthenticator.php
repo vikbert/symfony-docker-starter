@@ -48,8 +48,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $this->logger->debug('check if request app_login supported');
 
-        return 'app_login' === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     /**
