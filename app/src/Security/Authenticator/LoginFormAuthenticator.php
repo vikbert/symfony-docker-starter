@@ -5,7 +5,6 @@ namespace App\Security\Authenticator;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Exception;
-use JetBrains\PhpStorm\ArrayShape;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -53,9 +52,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             && $request->isMethod('POST');
     }
 
-    #[ArrayShape(['email' => "mixed", 'password' => "mixed", 'csrf_token' => "mixed"])]
-    public function getCredentials(Request $request
-    ): array {
+    /**
+     * @return array [
+     *     'email' => string,
+     *     'password' => string,
+     *     'csrf_token' => string,
+     * ]
+     */
+    public function getCredentials(Request $request): array
+    {
         $credentials = [
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
@@ -72,14 +77,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $loginFormUserProvider): UserInterface
+    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
 
-        $loginFormUser = $loginFormUserProvider->loadUserByUsername($credentials['email']);
+        $loginFormUser = $userProvider->loadUserByUsername($credentials['email']);
 
         $grantedUser = new User();
         $grantedUser->setUsername($loginFormUser->getUsername());

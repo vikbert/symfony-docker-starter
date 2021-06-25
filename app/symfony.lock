@@ -141,6 +141,12 @@
     "paragonie/random_compat": {
         "version": "v9.99.100"
     },
+    "phpstan/extension-installer": {
+        "version": "1.1.0"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.90"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },

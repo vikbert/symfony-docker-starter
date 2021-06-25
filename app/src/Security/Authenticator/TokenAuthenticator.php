@@ -4,7 +4,6 @@ namespace App\Security\Authenticator;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,12 +37,10 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function supports(Request $request): bool
     {
-        // sso_login not supported by TokenAuthenticator, but by SsoAuthenticator
         if ('api_sso_login' === $request->attributes->get('_route')) {
             return false;
         }
 
-        // app_login not supported by TokenAuthenticator, but by LoginFormAuthenticator
         if ('api_login' === $request->attributes->get('_route')) {
             return false;
         }
@@ -59,7 +56,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         return false;
     }
 
-    #[ArrayShape(['token' => "mixed"])] 
+    /**
+     * @return array [ 'authToken' => string | null]
+     */
     public function getCredentials(Request $request): array
     {
         $token = null;

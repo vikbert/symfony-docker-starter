@@ -41,6 +41,9 @@ final class TokenController extends AbstractController
         );
     }
 
+    /**
+     * @param array<int, string> $keys
+     */
     private function assertParamsSet(ParameterBag $parameterBag, array $keys): void
     {
         foreach ($keys as $key) {

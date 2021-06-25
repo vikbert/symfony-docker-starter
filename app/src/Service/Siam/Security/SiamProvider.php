@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace App\Service\Siam\Security;
 
 use App\Service\Siam\SiamConstant;
-use JetBrains\PhpStorm\Pure;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
@@ -17,15 +16,18 @@ final class SiamProvider extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
-    protected $baseAuthorizationUrl;
-    protected $baseAccessTokenUrl;
-    protected $resourceOwnerDetailsUrl;
+    protected string $baseAuthorizationUrl;
+    protected string $baseAccessTokenUrl;
+    protected string $resourceOwnerDetailsUrl;
 
     public function getBaseAuthorizationUrl(): string
     {
         return $this->baseAuthorizationUrl;
     }
 
+    /**
+     * @param array<string, string> $params
+     */
     public function getBaseAccessTokenUrl(array $params): string
     {
         return $this->baseAccessTokenUrl;
@@ -37,13 +39,18 @@ final class SiamProvider extends AbstractProvider
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     protected function getDefaultScopes(): array
     {
         return [SiamConstant::SSO_SCOPE];
     }
 
+    /**
+     * @param array<string, string> $options
+     *
+     * @return array<string, string>
+     */
     protected function getAuthorizationParameters(array $options): array
     {
         $params = parent::getAuthorizationParameters($options);
@@ -51,6 +58,9 @@ final class SiamProvider extends AbstractProvider
         return $this->addMissingParameters($params);
     }
 
+    /**
+     * @param array<string, string> $params
+     */
     protected function getAccessTokenRequest(array $params): RequestInterface
     {
         $params = $this->addMissingParameters($params);
@@ -58,6 +68,11 @@ final class SiamProvider extends AbstractProvider
         return parent::getAccessTokenRequest($params);
     }
 
+    /**
+     * @param array<string, string> $params
+     *
+     * @return array<string, string>
+     */
     private function addMissingParameters(array $params): array
     {
         $params = array_merge(
@@ -71,6 +86,11 @@ final class SiamProvider extends AbstractProvider
         return $params;
     }
 
+    /**
+     * @param array<string, int|string> $data
+     *
+     * @throws IdentityProviderException
+     */
     protected function checkResponse(ResponseInterface $response, $data): void
     {
         if ($response->getStatusCode() >= 400) {
@@ -78,7 +98,6 @@ final class SiamProvider extends AbstractProvider
         }
     }
 
-    #[Pure]
     protected function createResourceOwner(array $response, AccessToken $token): SiamResourceOwner
     {
         return new SiamResourceOwner($response);

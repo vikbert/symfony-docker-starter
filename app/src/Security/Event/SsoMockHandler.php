@@ -11,7 +11,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class SsoMockHandler implements EventSubscriberInterface
 {
-    #[ArrayShape([KernelEvents::CONTROLLER => "string"])]
+    /**
+     * @return array<string, string>
+     */
     public static function getSubscribedEvents(): array
     {
         return [

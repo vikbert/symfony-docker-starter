@@ -14,28 +14,38 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     /**
+     * @var string
      * @ORM\Id
-     * @ORM\Column(type="string")
+     * @ORM\Column
      */
     private string $id;
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     * @ORM\Column
      */
     private string $username;
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     * @ORM\Column
      */
     private ?string $password;
+
     /**
      * @ORM\Column(type="json", nullable=true)
      */
     private $roles;
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     * @ORM\Column(nullable=true)
      */
     private ?string $authToken;
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     * @ORM\Column(nullable=true)
      */
     private $accessToken;
 
@@ -79,11 +89,17 @@ class User implements UserInterface
         return $this->authToken;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getRoles(): array
     {
         return $this->roles ?? [];
     }
 
+    /**
+     * @param array<int, string> $roles
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
