@@ -14,20 +14,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     /**
-     * @var string
      * @ORM\Id
      * @ORM\Column
      */
     private string $id;
 
     /**
-     * @var string
      * @ORM\Column
      */
     private string $username;
 
     /**
-     * @var string|null
      * @ORM\Column
      */
     private ?string $password;
@@ -39,7 +36,6 @@ class User implements UserInterface
     private $roles;
 
     /**
-     * @var string|null
      * @ORM\Column(nullable=true)
      */
     private ?string $authToken;
