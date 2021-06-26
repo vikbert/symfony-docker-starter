@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
-class ProfileController extends AbstractController
+final class ProfileController extends AbstractController
 {
     /**
      * @Route("/profile", name="app_profile", methods={"GET"})
