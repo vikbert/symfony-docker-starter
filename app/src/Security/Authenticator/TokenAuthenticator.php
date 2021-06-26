@@ -74,10 +74,7 @@ final class TokenAuthenticator extends AbstractGuardAuthenticator
         ];
     }
 
-    /**
-     * @param string[] $credentials
-     */
-    public function getUser(array $credentials, UserProviderInterface $userProvider): UserInterface
+    public function getUser(mixed $credentials, UserProviderInterface $userProvider): UserInterface
     {
         $token = $credentials['authToken'];
 

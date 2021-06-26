@@ -77,10 +77,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
-    /**
-     * @param string[] $credentials
-     */
-    public function getUser(array $credentials, UserProviderInterface $userProvider): UserInterface
+    public function getUser(mixed $credentials, UserProviderInterface $userProvider): UserInterface
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
@@ -98,10 +95,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $grantedUser;
     }
 
-    /**
-     * @param string[] $credentials
-     */
-    public function checkCredentials(array $credentials, UserInterface $user): bool
+    public function checkCredentials(mixed $credentials, UserInterface $user): bool
     {
         if ($user->getPassword() === $credentials['password']) {
             return true;

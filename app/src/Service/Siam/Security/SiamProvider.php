@@ -68,10 +68,7 @@ final class SiamProvider extends AbstractProvider
         return parent::getAccessTokenRequest($params);
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
-    protected function checkResponse(ResponseInterface $response, array|string $data): void
+    protected function checkResponse(ResponseInterface $response, $data): void
     {
         if ($response->getStatusCode() >= 400) {
             throw new IdentityProviderException(
