@@ -72,6 +72,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "nunomaduro/phpinsights": "^2.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^0.12.90",
         "phpstan/phpstan-symfony": "^0.12.37",
