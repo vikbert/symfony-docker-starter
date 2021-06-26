@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
-class User implements UserInterface
+final class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -33,7 +33,7 @@ class User implements UserInterface
      * @var array<int, string> | null
      * @ORM\Column(type="json", nullable=true)
      */
-    private $roles;
+    private ?array $roles;
 
     /**
      * @ORM\Column(nullable=true)
@@ -41,10 +41,9 @@ class User implements UserInterface
     private ?string $authToken;
 
     /**
-     * @var string|null
      * @ORM\Column(nullable=true)
      */
-    private $accessToken;
+    private ?string $accessToken;
 
     public function __construct()
     {

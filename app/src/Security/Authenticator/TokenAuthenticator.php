@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-class TokenAuthenticator extends AbstractGuardAuthenticator
+final class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     public const COOKIE_AUTH_TOKEN = 'authToken';
     public const HEADER_AUTH_TOKEN = 'X-AUTH-TOKEN';
@@ -38,11 +38,11 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function supports(Request $request): bool
     {
-        if ('api_sso_login' === $request->attributes->get('_route')) {
+        if ($request->attributes->get('_route') === 'api_sso_login') {
             return false;
         }
 
-        if ('api_login' === $request->attributes->get('_route')) {
+        if ($request->attributes->get('_route') === 'api_login') {
             return false;
         }
 
@@ -58,7 +58,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     }
 
     /**
-     * @return array [ 'authToken' => string | null]
+     * @return array<string> | null
      */
     public function getCredentials(Request $request): array
     {
@@ -74,28 +74,34 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         ];
     }
 
-    public function getUser($credentials, UserProviderInterface $loginFormUserProvider): UserInterface
+    /**
+     * @param string[] $credentials
+     */
+    public function getUser(array $credentials, UserProviderInterface $userProvider): UserInterface
     {
         $token = $credentials['authToken'];
 
-        if (null === $token) {
+        if ($token === null) {
             throw new AuthenticationException('Token empty!');
         }
 
         $user = $this->userRepository->findOneByToken($token);
-        if (null === $user) {
+        if ($user === null) {
             throw new AuthenticationException('User not found by token!');
         }
 
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user): bool
+    public function checkCredentials(mixed $credentials, UserInterface $user): bool
     {
         return true;
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    /**
+     * @return null
+     */
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
         $user = $token->getUser();
         if (is_string($user)) {

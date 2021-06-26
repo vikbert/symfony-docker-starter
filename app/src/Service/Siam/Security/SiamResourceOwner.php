@@ -11,6 +11,9 @@ final class SiamResourceOwner implements ResourceOwnerInterface
 {
     private $responseData;
 
+    /**
+     * @param string[] $responseData
+     */
     public function __construct(array $responseData = [])
     {
         $this->responseData = $responseData;
@@ -21,6 +24,9 @@ final class SiamResourceOwner implements ResourceOwnerInterface
         return $this->responseData[SiamConstant::RESPONSE_KEY_WORKFORCE_ID] ?? null;
     }
 
+    /**
+     * @return array<string>
+     */
     public function toArray(): array
     {
         return $this->responseData;

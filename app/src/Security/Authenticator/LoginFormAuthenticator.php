@@ -22,7 +22,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
@@ -30,7 +30,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
-    private UserRepository $userRepository;
+    private $userRepository;
 
     public function __construct(
         LoggerInterface $logger,
@@ -48,15 +48,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $this->logger->debug('check if request app_login supported');
 
-        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
+        return $request->attributes->get('_route') === 'app_login'
+            && $request->isMethod('POST');
     }
 
     /**
-     * @return array [
-     *     'email' => string,
-     *     'password' => string,
-     *     'csrf_token' => string,
-     * ]
+     * @return array<string> [
+     *               'email' => string,
+     *               'password' => string,
+     *               'csrf_token' => string,
+     *               ]
      */
     public function getCredentials(Request $request): array
     {
@@ -76,7 +77,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
+    /**
+     * @param string[] $credentials
+     */
+    public function getUser(array $credentials, UserProviderInterface $userProvider): UserInterface
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
@@ -94,7 +98,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $grantedUser;
     }
 
-    public function checkCredentials($credentials, UserInterface $user): bool
+    /**
+     * @param string[] $credentials
+     */
+    public function checkCredentials(array $credentials, UserInterface $user): bool
     {
         if ($user->getPassword() === $credentials['password']) {
             return true;
@@ -105,7 +112,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
+        if ($targetPath) {
             return new RedirectResponse($targetPath);
         }
 

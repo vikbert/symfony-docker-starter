@@ -1,7 +1,7 @@
 parameters:
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
-    level: 6
+    level: 5
     paths:
         - src
         

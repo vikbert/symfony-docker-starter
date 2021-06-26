@@ -53,7 +53,7 @@ final class SiamAuthenticator extends SocialAuthenticator
 
     public function supports(Request $request): bool
     {
-        return SiamConstant::ROUTE_CHECK === $request->attributes->get('_route');
+        return $request->attributes->get('_route') === SiamConstant::ROUTE_CHECK;
     }
 
     public function getCredentials(Request $request): AccessToken
@@ -61,7 +61,7 @@ final class SiamAuthenticator extends SocialAuthenticator
         return $this->fetchAccessToken($this->getSiamClient());
     }
 
-    public function getUser($credentials, UserProviderInterface $loginFormUserProvider): User
+    public function getUser(AccessToken $credentials, UserProviderInterface $userProvider): User
     {
         /** @var SiamResourceOwner $resourceOwner */
         $resourceOwner = $this->getSiamClient()->getOAuth2Provider()->getResourceOwner($credentials);
@@ -80,8 +80,11 @@ final class SiamAuthenticator extends SocialAuthenticator
         return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): RedirectResponse
-    {
+    public function onAuthenticationSuccess(
+        Request $request,
+        TokenInterface $token,
+        string $providerKey
+    ): RedirectResponse {
         $user = $token->getUser();
 
         if (!$user instanceof User) {

@@ -25,6 +25,6 @@ final class LoginFormUserProvider implements UserProviderInterface
 
     public function supportsClass(string $class): bool
     {
-        return User::class === $class;
+        return $class === User::class;
     }
 }

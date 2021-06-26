@@ -69,40 +69,38 @@ final class SiamProvider extends AbstractProvider
     }
 
     /**
-     * @param array<string, string> $params
-     *
-     * @return array<string, string>
-     */
-    private function addMissingParameters(array $params): array
-    {
-        $params = array_merge(
-            $params,
-            [
-                'resourceServer' => SiamConstant::SSO_RESOURCE_SERVER,
-                'scope' => implode($this->getScopeSeparator(), $this->getDefaultScopes()),
-            ]
-        );
-
-        return $params;
-    }
-
-    /**
-     * @param array<string, int|string> $data
-     *
      * @throws IdentityProviderException
      */
-    protected function checkResponse(ResponseInterface $response, $data): void
+    protected function checkResponse(ResponseInterface $response, array|string $data): void
     {
         if ($response->getStatusCode() >= 400) {
-            throw new IdentityProviderException($data['error'] ?? $response->getReasonPhrase(), $response->getStatusCode(), $response->getBody()->getContents());
+            throw new IdentityProviderException(
+                $data['error'] ?? $response->getReasonPhrase(),
+                $response->getStatusCode(),
+                $response->getBody()->getContents()
+            );
         }
     }
 
+    /**
+     * @param array<string> $response
+     */
     protected function createResourceOwner(array $response, AccessToken $token): SiamResourceOwner
     {
         return new SiamResourceOwner($response);
     }
 
+    /**
+     * @param array<string> $params = [
+     *                              'scope' => '',
+     *                              'state' => '',
+     *                              'response_type' => '',
+     *                              'approval_prompt' => '',
+     *                              'redirect_uri' => '',
+     *                              'client_id' => '',
+     *                              'resourceServer' => '',
+     *                              ]
+     */
     protected function buildQueryString(array $params): string
     {
         return implode(
@@ -114,6 +112,22 @@ final class SiamProvider extends AbstractProvider
                 array_keys($params),
                 $params
             )
+        );
+    }
+
+    /**
+     * @param array<string> $params
+     *
+     * @return array<string>
+     */
+    private function addMissingParameters(array $params): array
+    {
+        return array_merge(
+            $params,
+            [
+                'resourceServer' => SiamConstant::SSO_RESOURCE_SERVER,
+                'scope' => implode($this->getScopeSeparator(), $this->getDefaultScopes()),
+            ]
         );
     }
 }

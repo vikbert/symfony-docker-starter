@@ -10,6 +10,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class SsoMockHandler implements EventSubscriberInterface
 {
+    /**
+     * @return string[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [

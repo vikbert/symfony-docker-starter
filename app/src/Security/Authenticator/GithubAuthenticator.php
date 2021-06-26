@@ -53,7 +53,7 @@ final class GithubAuthenticator extends SocialAuthenticator
 
     public function supports(Request $request): bool
     {
-        return 'api_github_check' === $request->attributes->get('_route');
+        return $request->attributes->get('_route') === 'api_github_check';
     }
 
     public function getCredentials(Request $request): AccessToken
@@ -61,7 +61,7 @@ final class GithubAuthenticator extends SocialAuthenticator
         return $this->fetchAccessToken($this->getSsoClient());
     }
 
-    public function getUser($credentials, UserProviderInterface $loginFormUserProvider): User
+    public function getUser(AccessToken $credentials, UserProviderInterface $loginFormUserProvider): User
     {
         /** @var SiamResourceOwner $resourceOwner */
         $resourceOwner = $this->getSsoClient()->getOAuth2Provider()->getResourceOwner($credentials);
@@ -81,8 +81,11 @@ final class GithubAuthenticator extends SocialAuthenticator
         return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): RedirectResponse
-    {
+    public function onAuthenticationSuccess(
+        Request $request,
+        TokenInterface $token,
+        string $providerKey
+    ): RedirectResponse {
         $user = $token->getUser();
         if (!$user instanceof User) {
             throw new AuthenticationException('User not found by token');
