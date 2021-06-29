@@ -61,7 +61,7 @@ final class SiamAuthenticator extends SocialAuthenticator
         return $this->fetchAccessToken($this->getSiamClient());
     }
 
-    public function getUser(mixed $credentials, UserProviderInterface $userProvider): User
+    public function getUser($credentials, UserProviderInterface $userProvider): User
     {
         /** @var SiamResourceOwner $resourceOwner */
         $resourceOwner = $this->getSiamClient()->getOAuth2Provider()->getResourceOwner($credentials);
