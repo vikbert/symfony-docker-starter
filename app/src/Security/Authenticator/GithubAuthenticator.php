@@ -61,7 +61,7 @@ final class GithubAuthenticator extends SocialAuthenticator
         return $this->fetchAccessToken($this->getSsoClient());
     }
 
-    public function getUser(mixed $credentials, UserProviderInterface $loginFormUserProvider): User
+    public function getUser($credentials, UserProviderInterface $loginFormUserProvider): User
     {
         /** @var SiamResourceOwner $resourceOwner */
         $resourceOwner = $this->getSsoClient()->getOAuth2Provider()->getResourceOwner($credentials);

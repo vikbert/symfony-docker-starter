@@ -74,7 +74,7 @@ final class TokenAuthenticator extends AbstractGuardAuthenticator
         ];
     }
 
-    public function getUser(mixed $credentials, UserProviderInterface $userProvider): UserInterface
+    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
     {
         $token = $credentials['authToken'];
 
@@ -90,7 +90,7 @@ final class TokenAuthenticator extends AbstractGuardAuthenticator
         return $user;
     }
 
-    public function checkCredentials(mixed $credentials, UserInterface $user): bool
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return true;
     }

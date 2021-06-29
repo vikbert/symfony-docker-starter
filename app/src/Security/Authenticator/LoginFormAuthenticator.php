@@ -36,7 +36,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         LoggerInterface $logger,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserRepository $userRepository,
+        UserRepository $userRepository
     ) {
         $this->logger = $logger;
         $this->urlGenerator = $urlGenerator;
@@ -52,13 +52,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             && $request->isMethod('POST');
     }
 
-    /**
-     * @return array<string> [
-     *               'email' => string,
-     *               'password' => string,
-     *               'csrf_token' => string,
-     *               ]
-     */
     public function getCredentials(Request $request): array
     {
         $credentials = [
@@ -77,7 +70,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
-    public function getUser(mixed $credentials, UserProviderInterface $userProvider): UserInterface
+    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
@@ -95,7 +88,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $grantedUser;
     }
 
-    public function checkCredentials(mixed $credentials, UserInterface $user): bool
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         if ($user->getPassword() === $credentials['password']) {
             return true;
