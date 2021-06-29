@@ -9,4 +9,4 @@ services:
             - ./:/var/www
             - ./:/bindmount:rw
         ports:
-            - "1234:1234"
+            - "1234:1234"b

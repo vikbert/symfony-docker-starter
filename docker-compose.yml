@@ -11,19 +11,22 @@ services:
       ports:
           - "1234:1234"
   php:
-    build: ./docker/php
-    image: base-php:latest
-    volumes:
-      - ./app:/var/www:cached
+      build: ./docker/php
+      image: base-alpine-php:7.4
+      extra_hosts:
+          - "host.docker.internal:host-gateway"
+      volumes:
+          - ./app:/var/www:cached
 
   nginx:
-    build: ./docker/nginx
-    image: base-nginx:latest
-    volumes:
-      - ./app:/var/www:cached
-      - ./logs/nginx:/var/log/nginx:cached
-    ports: [80:80, 443:443]
-
+      build: ./docker/nginx
+      image: base-nginx:latest
+      volumes:
+          - ./app:/var/www:cached
+          - ./logs/nginx:/var/log/nginx:cached
+      ports:
+          - "80:80"
+          - "443:443"
   db:
     build: ./docker/db
     image: base-db:latest
