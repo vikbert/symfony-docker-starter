@@ -19,6 +19,10 @@ start: ## start the application
 
 
 #-- db
+db-reset: ## reset the db
+	make db-clean
+	make db-migrate
+
 db-clean: ## clean the db
 	docker-compose exec php bin/console doctrine:database:drop --if-exists -n --force
 	docker-compose exec php bin/console doctrine:database:create --if-not-exists -n
