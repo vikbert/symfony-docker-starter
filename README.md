@@ -13,12 +13,13 @@
       <img src="https://img.shields.io/badge/License-Apache-brightgreen.svg?style=flat-square" alt="Apache License">
     </a>
   </p>
+  <img src="docs/sf5.png" alt="symfony 5">
 </div>
 
 ---
 
 ## Starting started
-
+Be sure you have installed `symfony CLI` on local environment, or try to install it <https://symfony.com/download>
 ```
 cd symfony-docker-start
 make init
