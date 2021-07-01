@@ -21,6 +21,7 @@
 
 ```
 cd symfony-docker-start
+make init
 make start
 ```
 
