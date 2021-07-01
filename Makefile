@@ -8,15 +8,17 @@ help:
 .DEFAULT_GOAL := help
 
 #-- project
+
+init: ## init symfony project
+	symfony new app
+	cp docs/templates/* app/
+
 start: ## start the application
 	make docker-clean
-	cd ./docker/siam && npm install
 	docker-compose up -d
 	sleep 5
 	docker-compose exec php composer install
-	make db-migrate
 	open http://localhost
-
 
 #-- db
 db-reset: ## reset the db
@@ -37,9 +39,3 @@ docker-clean: ## clean up all docker resource
 	docker image prune -f
 	docker volume prune -f
 	docker network prune -f
-
-#-- E2E tests
-test: ## start the cypress E2E tests
-	node_modules/cypress/bin/cypress run --spec 'cypress/integration/login_*.spec.js'
-test-open: ## open the cypress E2E runner
-	node_modules/cypress/bin/cypress open

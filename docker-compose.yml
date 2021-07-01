@@ -1,15 +1,6 @@
 version: '3'
 
 services:
-  siam:
-      build: ./docker/siam
-      image: siamoc:latest
-      working_dir: /var/www
-      volumes:
-          - ./docker/siam:/var/www
-          - ./docker/siam:/bindmount:rw
-      ports:
-          - "1234:1234"
   php:
       build: ./docker/php
       image: base-alpine-php:7.4
@@ -31,9 +22,9 @@ services:
     build: ./docker/db
     image: base-db:latest
     environment:
-      POSTGRES_USER: ssomoc
-      POSTGRES_PASSWORD: ssomoc
-      POSTGRES_DB: ssomoc
+      POSTGRES_USER: symfony
+      POSTGRES_PASSWORD: symfony
+      POSTGRES_DB: symfony
     ports: [2345:5432]
     restart: always
 

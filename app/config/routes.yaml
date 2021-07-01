@@ -1,4 +1,0 @@
-!php/const:App\Service\Siam\SiamConstant::ROUTE_CHECK:
-    path:     /api/siam/check
-    controller: App\Service\Siam\Controller\CheckController
-    methods: GET
